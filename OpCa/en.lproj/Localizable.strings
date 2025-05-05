@@ -1,0 +1,78 @@
+// Common
+"app_name" = "OpCa";
+"cancel" = "Cancel";
+"save" = "Save";
+"delete" = "Delete";
+"edit" = "Edit";
+"done" = "Done";
+"error" = "Error";
+"loading" = "Loading...";
+
+// Home Screen
+"home_title" = "OpCa";
+"home_subtitle" = "Veterinary Diagnostic Tool";
+"start_analysis" = "Start New Analysis";
+"recent_analyses" = "Recent Analyses";
+"view_all" = "View All";
+
+// Camera
+"camera_title" = "Take Picture";
+"camera_instructions" = "Position sample under DIPLE lens";
+"adjust_light" = "Adjust Light Intensity";
+"adjust_focus" = "Adjust Focus";
+"take_picture" = "Capture";
+"retake" = "Retake";
+"confirm" = "Confirm";
+
+// Analysis
+"analysis_title" = "Analysis";
+"analysis_in_progress" = "Analysis in progress...";
+"sample_name" = "Sample Name";
+"sample_location" = "Location";
+"sample_date" = "Date";
+"sample_notes" = "Notes";
+"parasite_detection" = "Parasite Detection";
+
+// Results
+"results_title" = "Results";
+"confidence_level" = "Confidence Level";
+"neosporosis" = "Neosporosis";
+"echinococcosis" = "Echinococcosis";
+"coenurosis" = "Coenurosis";
+"share_results" = "Share Results";
+"export_pdf" = "Export as PDF";
+
+// Settings
+"settings_title" = "Settings";
+"appearance" = "Appearance";
+"theme" = "Theme";
+"system" = "System";
+"light" = "Light";
+"dark" = "Dark";
+"high_contrast_mode" = "High Contrast Mode";
+"large_display_mode" = "Large Display Mode";
+"camera" = "Camera";
+"show_grid" = "Show Grid";
+"data" = "Data";
+"auto_sync_data" = "Auto-sync Data";
+"notifications" = "Notifications";
+"language" = "Language";
+"app_language" = "App Language";
+"about" = "About";
+"version" = "Version";
+"about_opca" = "About OpCa";
+"help_support" = "Help & Support";
+"reset_to_defaults" = "Reset to Defaults";
+"Are you sure you want to reset all settings to default values?" = "Are you sure you want to reset all settings to default values?";
+
+// About
+"about_page_title" = "About";
+"app_description" = "OpCa helps veterinarians diagnose parasitic infections using microscopic image analysis with AI technology.";
+"credits" = "Credits";
+"designed_by" = "Designed and developed by";
+"ai_model" = "AI Model";
+"legal" = "Legal";
+"privacy_policy" = "Privacy Policy";
+"terms_of_use" = "Terms of Use";
+"licenses" = "Licenses";
+"copyright" = "© 2025 OpCa. All rights reserved."; 

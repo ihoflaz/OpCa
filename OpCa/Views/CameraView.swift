@@ -4,6 +4,7 @@ import Combine
 
 struct CameraView: View {
     @StateObject private var viewModel = CameraViewModel()
+    @StateObject private var settingsViewModel = SettingsViewModel.shared
     @Environment(\.dismiss) private var dismiss
     
     var onImageCaptured: (Data) -> Void
@@ -20,6 +21,12 @@ struct CameraView: View {
             CameraPreviewView()
                 .edgesIgnoringSafeArea(.all)
             #endif
+            
+            // Camera grid overlay
+            if settingsViewModel.cameraGridEnabled {
+                CameraGridView()
+                    .edgesIgnoringSafeArea(.all)
+            }
             
             VStack {
                 // Top controls
@@ -179,6 +186,7 @@ struct CameraView: View {
         .onDisappear {
             viewModel.stopCamera()
         }
+        .dynamicTypeSize(settingsViewModel.largeDisplayMode ? .xxxLarge : .large)
     }
 }
 
@@ -379,6 +387,33 @@ struct StaticCameraPreview: View {
                     }
                     .padding(.horizontal)
                     .padding(.bottom, 30)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Camera Grid View
+struct CameraGridView: View {
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                // Vertical lines
+                ForEach(1..<3) { i in
+                    let position = geometry.size.width / 3 * CGFloat(i)
+                    Rectangle()
+                        .fill(Color.white.opacity(0.4))
+                        .frame(width: 1)
+                        .position(x: position, y: geometry.size.height / 2)
+                }
+                
+                // Horizontal lines  
+                ForEach(1..<3) { i in
+                    let position = geometry.size.height / 3 * CGFloat(i)
+                    Rectangle()
+                        .fill(Color.white.opacity(0.4))
+                        .frame(height: 1)
+                        .position(x: geometry.size.width / 2, y: position)
                 }
             }
         }

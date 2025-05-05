@@ -1,44 +1,65 @@
 import Foundation
 import SwiftUI
+import Combine
 
-@Observable
-class SettingsViewModel {
+class SettingsViewModel: ObservableObject {
+    // Environment değişkeni olarak paylaşılabilmesi için static bir instance oluşturuyorum
+    static let shared = SettingsViewModel()
+    
     private let settingsManager = SettingsManager()
-    private let localizationManager = LocalizationManager()
+    // Shared örneği kullan
+    private let localizationManager = LocalizationManager.shared
     
-    var colorSchemePreference: ColorSchemePreference {
-        get { settingsManager.colorSchemePreference }
-        set { settingsManager.setColorScheme(newValue) }
+    @Published var colorSchemePreference: ColorSchemePreference {
+        didSet {
+            settingsManager.setColorScheme(colorSchemePreference)
+            NotificationCenter.default.post(name: .settingsChanged, object: nil)
+        }
     }
     
-    var autoDataSync: Bool {
-        get { settingsManager.autoDataSync }
-        set { settingsManager.setAutoDataSync(newValue) }
+    @Published var autoDataSync: Bool {
+        didSet {
+            settingsManager.setAutoDataSync(autoDataSync)
+            NotificationCenter.default.post(name: .settingsChanged, object: nil)
+        }
     }
     
-    var notificationsEnabled: Bool {
-        get { settingsManager.notificationsEnabled }
-        set { settingsManager.setNotificationsEnabled(newValue) }
+    @Published var notificationsEnabled: Bool {
+        didSet {
+            settingsManager.setNotificationsEnabled(notificationsEnabled)
+            NotificationCenter.default.post(name: .settingsChanged, object: nil)
+        }
     }
     
-    var highContrastMode: Bool {
-        get { settingsManager.highContrastMode }
-        set { settingsManager.setHighContrastMode(newValue) }
+    @Published var highContrastMode: Bool {
+        didSet {
+            settingsManager.setHighContrastMode(highContrastMode)
+            NotificationCenter.default.post(name: .settingsChanged, object: nil)
+        }
     }
     
-    var largeDisplayMode: Bool {
-        get { settingsManager.largeDisplayMode }
-        set { settingsManager.setLargeDisplayMode(newValue) }
+    @Published var largeDisplayMode: Bool {
+        didSet {
+            settingsManager.setLargeDisplayMode(largeDisplayMode)
+            NotificationCenter.default.post(name: .settingsChanged, object: nil)
+        }
     }
     
-    var cameraGridEnabled: Bool {
-        get { settingsManager.cameraGridEnabled }
-        set { settingsManager.setCameraGridEnabled(newValue) }
+    @Published var cameraGridEnabled: Bool {
+        didSet {
+            settingsManager.setCameraGridEnabled(cameraGridEnabled)
+            NotificationCenter.default.post(name: .settingsChanged, object: nil)
+        }
     }
     
-    var currentLanguage: AppLanguage {
-        get { localizationManager.currentLanguage }
-        set { localizationManager.setLanguage(newValue) }
+    @Published var currentLanguage: AppLanguage {
+        didSet {
+            localizationManager.setLanguage(currentLanguage)
+            NotificationCenter.default.post(name: .settingsChanged, object: nil)
+            
+            // Dil değişikliği bildirimini artık setLanguage fonksiyonu içinde gönderiyoruz
+            // Bu sayede hem ViewModel'den hem de LocalizationManager'dan doğrudan çağrıldığında çalışacak
+        }
     }
     
     var appVersion: String {
@@ -49,8 +70,31 @@ class SettingsViewModel {
         Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
     }
     
+    private init() {
+        // Başlangıç değerlerini settingsManager'dan al
+        self.colorSchemePreference = settingsManager.colorSchemePreference
+        self.autoDataSync = settingsManager.autoDataSync
+        self.notificationsEnabled = settingsManager.notificationsEnabled 
+        self.highContrastMode = settingsManager.highContrastMode
+        self.largeDisplayMode = settingsManager.largeDisplayMode
+        self.cameraGridEnabled = settingsManager.cameraGridEnabled
+        self.currentLanguage = localizationManager.currentLanguage
+    }
+    
     func resetToDefaults() {
         settingsManager.resetToDefaults()
+        
+        // ViewModel'i de güncelle
+        self.colorSchemePreference = .system
+        self.autoDataSync = false
+        self.notificationsEnabled = true
+        self.highContrastMode = false
+        self.largeDisplayMode = false
+        self.cameraGridEnabled = true
+        self.currentLanguage = .english
+        
+        // Değişiklikleri bildir
+        NotificationCenter.default.post(name: .settingsChanged, object: nil)
     }
     
     func getLocalizedString(for key: String) -> String {
@@ -60,4 +104,10 @@ class SettingsViewModel {
     func getColorScheme() -> ColorScheme? {
         colorSchemePreference.colorScheme
     }
+}
+
+// Ayarlar değiştiğinde bildirim göndermek için kullanacağımız notification
+extension Notification.Name {
+    static let settingsChanged = Notification.Name("com.opca.settingsChanged")
+    static let languageChanged = Notification.Name("com.opca.languageChanged")
 } 

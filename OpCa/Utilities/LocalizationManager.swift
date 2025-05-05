@@ -24,9 +24,12 @@ enum AppLanguage: String, CaseIterable, Identifiable {
 
 @Observable
 class LocalizationManager {
+    // Singleton instance
+    static let shared = LocalizationManager()
+    
     var currentLanguage: AppLanguage
     
-    init() {
+    private init() {
         // Get preferred language from UserDefaults or use system language
         if let savedLanguage = UserDefaults.standard.string(forKey: "appLanguage"),
            let language = AppLanguage(rawValue: savedLanguage) {
@@ -41,10 +44,11 @@ class LocalizationManager {
     func setLanguage(_ language: AppLanguage) {
         self.currentLanguage = language
         UserDefaults.standard.set(language.rawValue, forKey: "appLanguage")
+        // This change will be picked up by the observer in the app
+        NotificationCenter.default.post(name: .languageChanged, object: nil, userInfo: ["language": language.rawValue])
     }
     
     func localizedString(for key: String) -> String {
-        // Load the appropriate localized string based on current language
         let path = Bundle.main.path(forResource: currentLanguage.rawValue, ofType: "lproj")
         let bundle: Bundle
         
@@ -54,7 +58,30 @@ class LocalizationManager {
             bundle = Bundle.main
         }
         
-        return NSLocalizedString(key, bundle: bundle, comment: "")
+        return NSLocalizedString(key, tableName: "Localizable", bundle: bundle, value: key, comment: "")
+    }
+}
+
+extension String {
+    var localized: String {
+        LocalizationManager.shared.localizedString(for: self)
+    }
+    
+    func localized(with args: CVarArg...) -> String {
+        String(format: self.localized, locale: Locale.current, arguments: args)
+    }
+}
+
+extension Text {
+    // Creates a Text view that displays localized content identified by a key
+    static func localized(_ key: String) -> Text {
+        Text(LocalizationManager.shared.localizedString(for: key))
+    }
+}
+
+extension View {
+    func localizedText(_ key: String) -> some View {
+        self.accessibilityLabel(Text(LocalizationManager.shared.localizedString(for: key)))
     }
 }
 

@@ -19,12 +19,19 @@
     <string>6.0</string>
     <key>CFBundlePackageType</key>
     <string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>en</string>
+        <string>tr</string>
+    </array>
     
     <!-- Gizlilik İzinleri -->
     <key>NSCameraUsageDescription</key>
-    <string>OpCa needs camera access to capture microscopic images for analysis. This allows veterinarians to diagnose parasitic infections from microscopic samples.</string>
+    <string>OpCa requires camera access to capture images for parasite analysis.</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>OpCa needs access to your photo library to save diagnostic images and load previous samples for comparison.</string>
+    <string>OpCa requires access to your photo library to save and load images for parasite analysis.</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>OpCa may use the microphone when recording video samples of live parasitic activity.</string>
     
@@ -54,7 +61,14 @@
     
     <!-- Başlangıç Ekranı -->
     <key>UILaunchScreen</key>
-    <dict/>
+    <dict>
+        <key>UIColorName</key>
+        <string>launchScreenBackground</string>
+        <key>UIImageName</key>
+        <string>launch-logo</string>
+        <key>UIImageRespectsSafeAreaInsets</key>
+        <true/>
+    </dict>
     
     <!-- Diğer Ayarlar -->
     <key>ITSAppUsesNonExemptEncryption</key>

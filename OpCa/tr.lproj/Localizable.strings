@@ -1,0 +1,78 @@
+// Common
+"app_name" = "OpCa";
+"cancel" = "İptal";
+"save" = "Kaydet";
+"delete" = "Sil";
+"edit" = "Düzenle";
+"done" = "Tamam";
+"error" = "Hata";
+"loading" = "Yükleniyor...";
+
+// Home Screen
+"home_title" = "OpCa";
+"home_subtitle" = "Veteriner Teşhis Aracı";
+"start_analysis" = "Yeni Analiz Başlat";
+"recent_analyses" = "Son Analizler";
+"view_all" = "Tümünü Gör";
+
+// Camera
+"camera_title" = "Fotoğraf Çek";
+"camera_instructions" = "Örneği DIPLE lensinin altına yerleştirin";
+"adjust_light" = "Işık Yoğunluğunu Ayarla";
+"adjust_focus" = "Odağı Ayarla";
+"take_picture" = "Çek";
+"retake" = "Tekrar Çek";
+"confirm" = "Onayla";
+
+// Analysis
+"analysis_title" = "Analiz";
+"analysis_in_progress" = "Analiz devam ediyor...";
+"sample_name" = "Örnek Adı";
+"sample_location" = "Konum";
+"sample_date" = "Tarih";
+"sample_notes" = "Notlar";
+"parasite_detection" = "Parazit Tespiti";
+
+// Results
+"results_title" = "Sonuçlar";
+"confidence_level" = "Güven Seviyesi";
+"neosporosis" = "Neosporosis";
+"echinococcosis" = "Ekinokokkoz";
+"coenurosis" = "Koenuroz";
+"share_results" = "Sonuçları Paylaş";
+"export_pdf" = "PDF Olarak Dışa Aktar";
+
+// Settings
+"settings_title" = "Ayarlar";
+"appearance" = "Görünüm";
+"theme" = "Tema";
+"system" = "Sistem";
+"light" = "Açık";
+"dark" = "Koyu";
+"high_contrast_mode" = "Yüksek Kontrast Modu";
+"large_display_mode" = "Büyük Görüntü Modu";
+"camera" = "Kamera";
+"show_grid" = "Izgara Göster";
+"data" = "Veri";
+"auto_sync_data" = "Otomatik Veri Senkronizasyonu";
+"notifications" = "Bildirimler";
+"language" = "Dil";
+"app_language" = "Uygulama Dili";
+"about" = "Hakkında";
+"version" = "Sürüm";
+"about_opca" = "OpCa Hakkında";
+"help_support" = "Yardım ve Destek";
+"reset_to_defaults" = "Varsayılanlara Sıfırla";
+"Are you sure you want to reset all settings to default values?" = "Tüm ayarları varsayılan değerlere sıfırlamak istediğinizden emin misiniz?";
+
+// About
+"about_page_title" = "Hakkında";
+"app_description" = "OpCa, veteriner hekimlerin yapay zeka teknolojisi ile mikroskobik görüntü analizi kullanarak paraziter enfeksiyonları teşhis etmelerine yardımcı olur.";
+"credits" = "Katkıda Bulunanlar";
+"designed_by" = "Tasarlayan ve geliştiren";
+"ai_model" = "Yapay Zeka Modeli";
+"legal" = "Yasal";
+"privacy_policy" = "Gizlilik Politikası";
+"terms_of_use" = "Kullanım Koşulları";
+"licenses" = "Lisanslar";
+"copyright" = "© 2025 OpCa. Tüm hakları saklıdır."; 

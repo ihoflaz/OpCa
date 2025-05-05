@@ -8,10 +8,21 @@
 import SwiftUI
 import SwiftData
 
+// High contrast mode notification name
+extension Notification.Name {
+    static let highContrastModeChanged = Notification.Name("HighContrastModeChanged")
+}
+
 @main
 struct OpCaApp: App {
-    @State private var settingsViewModel = SettingsViewModel()
+    @StateObject private var settingsViewModel = SettingsViewModel.shared
     @AppStorage("didPopulateSampleData") private var didPopulateSampleData = false
+    
+    // Ayarların değiştiğini takip etmek için
+    @State private var settingsChanged = false
+    @State private var highContrastModeEnabled = false
+    @State private var currentLocale = Locale(identifier: "en")
+    @State private var refreshView = false
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -29,14 +40,59 @@ struct OpCaApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
+                .id(refreshView) // Force view refresh when language changes
                 .modelContainer(sharedModelContainer)
                 .preferredColorScheme(settingsViewModel.getColorScheme())
-                .environment(\.locale, Locale(identifier: settingsViewModel.currentLanguage.rawValue))
+                .environment(\.locale, currentLocale)
+                .dynamicTypeSize(settingsViewModel.largeDisplayMode ? .xxxLarge : .large)
+                .highContrastEnabled(highContrastModeEnabled) // Apply high contrast using custom modifier
                 .onAppear {
+                    // Set initial values
+                    highContrastModeEnabled = settingsViewModel.highContrastMode
+                    currentLocale = Locale(identifier: settingsViewModel.currentLanguage.rawValue)
+                    
                     // Demo verileri sadece ilk çalıştırmada ekle
                     if !didPopulateSampleData {
                         addSampleDataIfNeeded()
                     }
+                    
+                    // Ayar değişikliklerini dinle
+                    NotificationCenter.default.addObserver(
+                        forName: .settingsChanged,
+                        object: nil,
+                        queue: .main
+                    ) { _ in
+                        // state değişikliği yaparak UI'ın güncellenmesini sağla
+                        settingsChanged.toggle()
+                    }
+                    
+                    // Listen for high contrast mode changes
+                    NotificationCenter.default.addObserver(
+                        forName: .highContrastModeChanged,
+                        object: nil,
+                        queue: .main
+                    ) { notification in
+                        if let enabled = notification.userInfo?["enabled"] as? Bool {
+                            highContrastModeEnabled = enabled
+                        }
+                    }
+                    
+                    // Listen for language changes
+                    NotificationCenter.default.addObserver(
+                        forName: .languageChanged,
+                        object: nil,
+                        queue: .main
+                    ) { notification in
+                        if let languageCode = notification.userInfo?["language"] as? String {
+                            currentLocale = Locale(identifier: languageCode)
+                            // Görünümü tamamen yenilemek için ID'yi değiştir
+                            refreshView.toggle()
+                        }
+                    }
+                }
+                .onChange(of: settingsChanged) { _, _ in
+                    // Bu değişkeni değiştirmek view'ın yeniden çizilmesini sağlar
+                    // Ayarlar değiştiğinde UI güncellemesi için gerekli
                 }
         }
     }
