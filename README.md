@@ -2,7 +2,7 @@
 
 OpCa is a modern mobile application designed for veterinarians to diagnose parasitic infections in dogs using microscopic image analysis. By capturing images through DIPLE lenses attached to smartphones, the app utilizes AI technology to identify parasites such as Neosporosis, Echinococcosis, and Coenurosis in dog feces.
 
-![OpCa Main Screen](./screenshots/home_screen.png)
+![OpCa Logo](./screenshots/logo.png)
 
 ## Features
 
