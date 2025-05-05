@@ -7,6 +7,7 @@ struct DashboardView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var analyses: [Analysis]
     @State private var showDeveloperOptions = false
+    private let localization = LocalizationManager.shared
     
     var body: some View {
         NavigationStack {
@@ -30,7 +31,7 @@ struct DashboardView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Dashboard")
+            .navigationTitle(localization.localizedString(for: "dashboard"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if viewModel.pendingUploads > 0 {
@@ -58,9 +59,9 @@ struct DashboardView: View {
             .overlay {
                 if analyses.isEmpty {
                     ContentUnavailableView {
-                        Label("No Analysis Data", systemImage: "doc.text.magnifyingglass")
+                        Label(localization.localizedString(for: "no_analyses"), systemImage: "doc.text.magnifyingglass")
                     } description: {
-                        Text("Start by capturing a sample image to analyze it for parasites")
+                        Text(localization.localizedString(for: "start_new_analysis"))
                     } actions: {
                         // Demo veri yoksa, oluşturmak için buton ekle
                         Button("Create Demo Data") {
@@ -87,12 +88,12 @@ struct DashboardView: View {
     private var statsView: some View {
         VStack(spacing: 20) {
             HStack {
-                Text("Statistics")
+                Text(localization.localizedString(for: "statistics"))
                     .font(.headline)
                 
                 Spacer()
                 
-                Picker("Time Frame", selection: $viewModel.selectedTimeFrame) {
+                Picker(localization.localizedString(for: "filter"), selection: $viewModel.selectedTimeFrame) {
                     ForEach(DashboardViewModel.TimeFrame.allCases) { timeFrame in
                         Text(timeFrame.rawValue).tag(timeFrame)
                     }
@@ -102,14 +103,14 @@ struct DashboardView: View {
             
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
                 StatCard(
-                    title: "Total Analyses",
+                    title: localization.localizedString(for: "total_scans"),
                     value: "\(viewModel.analysisSummary?.totalCount ?? 0)",
                     icon: "chart.bar.doc.horizontal",
                     color: .blue
                 )
                 
                 StatCard(
-                    title: "Pending Uploads",
+                    title: localization.localizedString(for: "pending_uploads"),
                     value: "\(viewModel.pendingUploads)",
                     icon: "arrow.up.circle",
                     color: viewModel.pendingUploads > 0 ? .orange : .green
@@ -122,7 +123,7 @@ struct DashboardView: View {
                     
                     if let highestType = highestCountType {
                         StatCard(
-                            title: "Most Common",
+                            title: localization.localizedString(for: "most_common"),
                             value: highestType.rawValue,
                             icon: highestType.icon,
                             color: highestType.color
@@ -131,7 +132,7 @@ struct DashboardView: View {
                     
                     let totalInfections = summary.parasiteCounts.values.reduce(0, +)
                     StatCard(
-                        title: "Infection Rate",
+                        title: localization.localizedString(for: "infection_rate"),
                         value: "\(Int((Double(totalInfections) / Double(max(1, summary.totalCount))) * 100))%",
                         icon: "chart.pie.fill",
                         color: .purple
@@ -146,7 +147,7 @@ struct DashboardView: View {
     
     private func visualizationView(summary: DashboardViewModel.AnalysisSummary) -> some View {
         VStack(alignment: .leading, spacing: 15) {
-            Text("Parasite Distribution")
+            Text(localization.localizedString(for: "parasite_distribution"))
                 .font(.headline)
             
             Chart {
@@ -273,83 +274,37 @@ struct DashboardView: View {
     
     private var recentAnalysesView: some View {
         VStack(alignment: .leading, spacing: 15) {
-            Text("Recent Analyses")
-                .font(.headline)
-            
-            ForEach(Array(analyses.prefix(5).enumerated()), id: \.element.id) { index, analysis in
-                NavigationLink(destination: AnalysisDetailView(analysis: analysis)) {
-                    HStack {
-                        if let imageData = analysis.imageData,
-                           let uiImage = UIImage(data: imageData) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 70, height: 70)
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                        } else {
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color.gray.opacity(0.3))
-                                .frame(width: 70, height: 70)
-                                .overlay {
-                                    Image(systemName: "photo")
-                                        .foregroundStyle(.secondary)
-                                }
-                        }
-                        
-                        VStack(alignment: .leading, spacing: 5) {
-                            Text(analysis.formattedDate)
-                                .font(.subheadline)
-                                .foregroundStyle(.primary)
-                            
-                            if let dominantType = analysis.dominantParasite {
-                                HStack {
-                                    Image(systemName: dominantType.icon)
-                                        .foregroundStyle(dominantType.color)
-                                    
-                                    Text(dominantType.rawValue)
-                                        .foregroundStyle(.secondary)
-                                        .font(.caption)
-                                }
-                            } else {
-                                Text("No parasites detected")
-                                    .foregroundStyle(.secondary)
-                                    .font(.caption)
-                            }
-                            
-                            if let location = analysis.location, !location.isEmpty {
-                                HStack {
-                                    Image(systemName: "location.fill")
-                                        .foregroundStyle(.secondary)
-                                    
-                                    Text(location)
-                                        .foregroundStyle(.secondary)
-                                        .font(.caption)
-                                }
-                            }
-                        }
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .foregroundStyle(.tertiary)
-                    }
-                    .padding()
-                    .background(Color(.secondarySystemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .contentShape(Rectangle())
+            HStack {
+                Text(localization.localizedString(for: "recent_scans"))
+                    .font(.headline)
+                
+                Spacer()
+                
+                NavigationLink(destination: AnalysisHistoryView()) {
+                    Text(localization.localizedString(for: "view_all"))
+                        .font(.subheadline)
+                        .foregroundStyle(.blue)
                 }
-                .buttonStyle(PlainButtonStyle())
             }
             
-            if analyses.count > 5 {
-                NavigationLink("View All Analyses") {
-                    AnalysisHistoryView()
+            if analyses.isEmpty {
+                Text(localization.localizedString(for: "no_recent_scans"))
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding()
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 15) {
+                        ForEach(Array(analyses.sorted(by: { $0.timestamp > $1.timestamp }).prefix(5))) { analysis in
+                            NavigationLink(destination: AnalysisDetailView(analysis: analysis)) {
+                                AnalysisCardView(analysis: analysis)
+                                    .frame(width: 180, height: 200)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.horizontal, 5) // A little padding for shadows
                 }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.blue.opacity(0.1))
-                .foregroundStyle(.blue)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
             }
         }
         .padding()
@@ -384,6 +339,79 @@ struct StatCard: View {
         .padding()
         .background(color.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+}
+
+// AnalysisCardView bileşenini ekle
+struct AnalysisCardView: View {
+    let analysis: Analysis
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            // Thumbnail image
+            ZStack(alignment: .topTrailing) {
+                if let imageData = analysis.imageData,
+                   let uiImage = UIImage(data: imageData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 120)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                } else {
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.3))
+                        .frame(height: 120)
+                        .overlay {
+                            Image(systemName: "photo")
+                                .foregroundStyle(.secondary)
+                                .font(.largeTitle)
+                        }
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                }
+                
+                // Upload status indicator
+                Image(systemName: analysis.isUploaded ? "checkmark.circle.fill" : "arrow.up.circle")
+                    .foregroundStyle(analysis.isUploaded ? .green : .orange)
+                    .padding(8)
+                    .background(.ultraThinMaterial)
+                    .clipShape(Circle())
+                    .padding(6)
+            }
+            
+            // Date
+            Text(analysis.formattedDate)
+                .font(.headline)
+                .foregroundStyle(.primary)
+            
+            // Dominant parasite
+            if let dominantType = analysis.dominantParasite {
+                HStack {
+                    Image(systemName: dominantType.icon)
+                        .foregroundStyle(dominantType.color)
+                    
+                    Text(dominantType.rawValue)
+                        .font(.subheadline)
+                }
+            } else {
+                Text(LocalizationManager.shared.localizedString(for: "no_parasites_detected"))
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            
+            // Location if available
+            if let location = analysis.location, !location.isEmpty {
+                Text(location)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+            }
+            
+            Spacer()
+        }
+        .padding(10)
+        .background(Color(.secondarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .shadow(radius: 2, x: 0, y: 1)
     }
 }
 

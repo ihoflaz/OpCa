@@ -7,6 +7,7 @@ struct AnalysisHistoryView: View {
     @State private var showingFilterOptions = false
     @State private var filterByParasite: ParasiteType?
     @State private var filterByUploadStatus: Bool?
+    private let localization = LocalizationManager.shared
     
     var filteredAnalyses: [Analysis] {
         var result = analyses
@@ -47,20 +48,20 @@ struct AnalysisHistoryView: View {
             }
         }
         .listStyle(PlainListStyle())
-        .navigationTitle("Analysis History")
-        .searchable(text: $searchText, prompt: "Search by location or notes")
+        .navigationTitle(localization.localizedString(for: "history_title"))
+        .searchable(text: $searchText, prompt: localization.localizedString(for: "search"))
         .overlay {
             if analyses.isEmpty {
                 ContentUnavailableView(
-                    "No Analysis Records",
+                    localization.localizedString(for: "no_analyses"),
                     systemImage: "doc.text.magnifyingglass",
-                    description: Text("You haven't performed any analyses yet")
+                    description: Text(localization.localizedString(for: "start_new_analysis"))
                 )
             } else if filteredAnalyses.isEmpty {
                 ContentUnavailableView(
-                    "No Results",
+                    localization.localizedString(for: "no_results"),
                     systemImage: "magnifyingglass",
-                    description: Text("Try changing your search or filters")
+                    description: Text(localization.localizedString(for: "try_changing_search"))
                 )
             }
         }
@@ -69,7 +70,7 @@ struct AnalysisHistoryView: View {
                 Button {
                     showingFilterOptions = true
                 } label: {
-                    Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+                    Label(localization.localizedString(for: "filter"), systemImage: "line.3.horizontal.decrease.circle")
                 }
             }
         }
@@ -151,16 +152,17 @@ struct FilterView: View {
     @Binding var filterByParasite: ParasiteType?
     @Binding var filterByUploadStatus: Bool?
     @Environment(\.dismiss) private var dismiss
+    private let localization = LocalizationManager.shared
     
     var body: some View {
         NavigationStack {
             List {
-                Section("Filter by Parasite") {
+                Section(localization.localizedString(for: "filter_by_parasite")) {
                     Button {
                         filterByParasite = nil
                     } label: {
                         HStack {
-                            Text("All Parasites")
+                            Text(localization.localizedString(for: "filter_all"))
                             Spacer()
                             if filterByParasite == nil {
                                 Image(systemName: "checkmark")
@@ -187,12 +189,12 @@ struct FilterView: View {
                     }
                 }
                 
-                Section("Filter by Upload Status") {
+                Section(localization.localizedString(for: "filter_by_upload_status")) {
                     Button {
                         filterByUploadStatus = nil
                     } label: {
                         HStack {
-                            Text("All Statuses")
+                            Text(localization.localizedString(for: "filter_all"))
                             Spacer()
                             if filterByUploadStatus == nil {
                                 Image(systemName: "checkmark")
@@ -207,7 +209,7 @@ struct FilterView: View {
                         HStack {
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundStyle(.green)
-                            Text("Uploaded")
+                            Text(localization.localizedString(for: "uploaded"))
                             Spacer()
                             if filterByUploadStatus == true {
                                 Image(systemName: "checkmark")
@@ -222,7 +224,7 @@ struct FilterView: View {
                         HStack {
                             Image(systemName: "arrow.up.circle")
                                 .foregroundStyle(.orange)
-                            Text("Not Uploaded")
+                            Text(localization.localizedString(for: "not_uploaded"))
                             Spacer()
                             if filterByUploadStatus == false {
                                 Image(systemName: "checkmark")
@@ -233,7 +235,7 @@ struct FilterView: View {
                 }
                 
                 Section {
-                    Button("Reset Filters") {
+                    Button(localization.localizedString(for: "reset_filters")) {
                         filterByParasite = nil
                         filterByUploadStatus = nil
                     }
@@ -241,11 +243,11 @@ struct FilterView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
-            .navigationTitle("Filter Options")
+            .navigationTitle(localization.localizedString(for: "filter_options"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
+                    Button(localization.localizedString(for: "done")) {
                         dismiss()
                     }
                 }

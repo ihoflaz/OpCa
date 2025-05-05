@@ -8,12 +8,36 @@
 "error" = "Hata";
 "loading" = "Yükleniyor...";
 
+// Tab Bar
+"dashboard" = "Pano";
+"new_scan" = "Yeni Tarama";
+"history" = "Geçmiş";
+"settings" = "Ayarlar";
+
 // Home Screen
 "home_title" = "OpCa";
 "home_subtitle" = "Veteriner Teşhis Aracı";
 "start_analysis" = "Yeni Analiz Başlat";
 "recent_analyses" = "Son Analizler";
 "view_all" = "Tümünü Gör";
+
+// New Scan Screen
+"parasite_detection" = "Parazit Tespiti";
+"capture_description" = "Paraziter enfeksiyonları tespit etmek için köpek dışkısı örneklerinin mikroskobik görüntülerini çekin.";
+"step_1_title" = "Örnek Hazırlama";
+"step_1_description" = "Örneği telefonunuza takılı DIPLE lensinin altına yerleştirin";
+"step_2_title" = "Görüntü Çekme";
+"step_2_description" = "Net bir görüntü için ışığı ve odağı ayarlayın";
+"step_3_title" = "Analiz";
+"step_3_description" = "Yapay zeka, parazitleri tespit etmek için görüntüyü analiz edecek";
+"begin_scan" = "Taramayı Başlat";
+
+// Permissions
+"permission_required" = "İzin Gerekli";
+"camera_permission_message" = "Mikroskobik görüntüler çekmek için kamera erişimi gereklidir.";
+"camera_permission_denied" = "Mikroskobik görüntüler çekmek için kamera erişimi gereklidir. Lütfen Ayarlar'da etkinleştirin.";
+"unknown_permission_status" = "Bilinmeyen kamera yetkilendirme durumu. Lütfen gizlilik ayarlarınızı kontrol edin.";
+"settings" = "Ayarlar";
 
 // Camera
 "camera_title" = "Fotoğraf Çek";
@@ -41,6 +65,43 @@
 "coenurosis" = "Koenuroz";
 "share_results" = "Sonuçları Paylaş";
 "export_pdf" = "PDF Olarak Dışa Aktar";
+
+// Dashboard
+"recent_scans" = "Son Taramalar";
+"no_recent_scans" = "Son tarama yok";
+"statistics" = "İstatistikler";
+"total_scans" = "Toplam Tarama";
+"positive_results" = "Pozitif Sonuçlar";
+"negative_results" = "Negatif Sonuçlar";
+"scan_history" = "Tarama Geçmişi";
+"pending_uploads" = "Bekleyen Yüklemeler";
+"most_common" = "En Yaygın";
+"infection_rate" = "Enfeksiyon Oranı";
+"parasite_distribution" = "Parazit Dağılımı";
+"no_parasites_detected" = "Parazit tespit edilmedi";
+
+// History
+"history_title" = "Analiz Geçmişi";
+"no_analyses" = "Analiz bulunamadı";
+"start_new_analysis" = "Yeni bir analiz başlat";
+"filter" = "Filtrele";
+"sort" = "Sırala";
+"search" = "Analizlerde ara...";
+"date_newest" = "Tarih (En Yeni)";
+"date_oldest" = "Tarih (En Eski)";
+"parasite_az" = "Parazit (A-Z)";
+"parasite_za" = "Parazit (Z-A)";
+"filter_all" = "Tümü";
+"filter_positive" = "Pozitif";
+"filter_negative" = "Negatif";
+"no_results" = "Sonuç Bulunamadı";
+"try_changing_search" = "Arama kriterlerinizi veya filtrelerinizi değiştirmeyi deneyin";
+"filter_by_parasite" = "Parazite Göre Filtrele";
+"filter_by_upload_status" = "Yükleme Durumuna Göre Filtrele";
+"uploaded" = "Yüklenmiş";
+"not_uploaded" = "Yüklenmemiş";
+"reset_filters" = "Filtreleri Sıfırla";
+"filter_options" = "Filtre Seçenekleri";
 
 // Settings
 "settings_title" = "Ayarlar";

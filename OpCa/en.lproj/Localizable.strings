@@ -8,12 +8,36 @@
 "error" = "Error";
 "loading" = "Loading...";
 
+// Tab Bar
+"dashboard" = "Dashboard";
+"new_scan" = "New Scan";
+"history" = "History";
+"settings" = "Settings";
+
 // Home Screen
 "home_title" = "OpCa";
 "home_subtitle" = "Veterinary Diagnostic Tool";
 "start_analysis" = "Start New Analysis";
 "recent_analyses" = "Recent Analyses";
 "view_all" = "View All";
+
+// New Scan Screen
+"parasite_detection" = "Parasite Detection";
+"capture_description" = "Capture microscopic images of dog feces samples to detect parasitic infections.";
+"step_1_title" = "Prepare Sample";
+"step_1_description" = "Place the sample under the DIPLE lens attached to your phone";
+"step_2_title" = "Capture Image";
+"step_2_description" = "Adjust light and focus for a clear image";
+"step_3_title" = "Analyze";
+"step_3_description" = "AI will analyze the image to detect parasites";
+"begin_scan" = "Begin Scan";
+
+// Permissions
+"permission_required" = "Permission Required";
+"camera_permission_message" = "Camera access is required to capture microscopic images.";
+"camera_permission_denied" = "Camera access is required to capture microscopic images. Please enable it in Settings.";
+"unknown_permission_status" = "Unknown camera authorization status. Please check your privacy settings.";
+"settings" = "Settings";
 
 // Camera
 "camera_title" = "Take Picture";
@@ -41,6 +65,43 @@
 "coenurosis" = "Coenurosis";
 "share_results" = "Share Results";
 "export_pdf" = "Export as PDF";
+
+// Dashboard
+"recent_scans" = "Recent Scans";
+"no_recent_scans" = "No recent scans";
+"statistics" = "Statistics";
+"total_scans" = "Total Scans";
+"positive_results" = "Positive Results";
+"negative_results" = "Negative Results";
+"scan_history" = "Scan History";
+"pending_uploads" = "Pending Uploads";
+"most_common" = "Most Common";
+"infection_rate" = "Infection Rate";
+"parasite_distribution" = "Parasite Distribution";
+"no_parasites_detected" = "No parasites detected";
+
+// History
+"history_title" = "Analysis History";
+"no_analyses" = "No analyses found";
+"start_new_analysis" = "Start a new analysis";
+"filter" = "Filter";
+"sort" = "Sort";
+"search" = "Search analyses...";
+"date_newest" = "Date (Newest)";
+"date_oldest" = "Date (Oldest)";
+"parasite_az" = "Parasite (A-Z)";
+"parasite_za" = "Parasite (Z-A)";
+"filter_all" = "All";
+"filter_positive" = "Positive";
+"filter_negative" = "Negative";
+"no_results" = "No Results";
+"try_changing_search" = "Try changing your search or filters";
+"filter_by_parasite" = "Filter by Parasite";
+"filter_by_upload_status" = "Filter by Upload Status";
+"uploaded" = "Uploaded";
+"not_uploaded" = "Not Uploaded";
+"reset_filters" = "Reset Filters";
+"filter_options" = "Filter Options";
 
 // Settings
 "settings_title" = "Settings";

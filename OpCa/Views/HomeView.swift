@@ -7,19 +7,20 @@ struct HomeView: View {
     @State private var showSettings = false
     @State private var showPermissionsAlert = false
     @State private var permissionAlertMessage = ""
+    private let localization = LocalizationManager.shared
     
     var body: some View {
         TabView {
             // Dashboard Tab
             DashboardView()
                 .tabItem {
-                    Label("Dashboard", systemImage: "chart.bar.doc.horizontal")
+                    Label(localization.localizedString(for: "dashboard"), systemImage: "chart.bar.doc.horizontal")
                 }
             
             // New Scan Tab
             newScanView
                 .tabItem {
-                    Label("New Scan", systemImage: "camera.viewfinder")
+                    Label(localization.localizedString(for: "new_scan"), systemImage: "camera.viewfinder")
                 }
             
             // History Tab
@@ -27,13 +28,13 @@ struct HomeView: View {
                 AnalysisHistoryView()
             }
             .tabItem {
-                Label("History", systemImage: "clock.arrow.circlepath")
+                Label(localization.localizedString(for: "history"), systemImage: "clock.arrow.circlepath")
             }
             
             // Settings Tab
             SettingsView()
                 .tabItem {
-                    Label("Settings", systemImage: "gear")
+                    Label(localization.localizedString(for: "settings"), systemImage: "gear")
                 }
         }
         .sheet(isPresented: $showCameraView) {
@@ -48,10 +49,10 @@ struct HomeView: View {
         }
         .alert(isPresented: $showPermissionsAlert) {
             Alert(
-                title: Text("Permission Required"),
+                title: Text(localization.localizedString(for: "permission_required")),
                 message: Text(permissionAlertMessage),
-                primaryButton: .default(Text("Settings"), action: openSettings),
-                secondaryButton: .cancel()
+                primaryButton: .default(Text(localization.localizedString(for: "settings")), action: openSettings),
+                secondaryButton: .cancel(Text(localization.localizedString(for: "cancel")))
             )
         }
     }
@@ -66,10 +67,10 @@ struct HomeView: View {
                     .frame(height: 120)
                     .padding(.top, 20)
                 
-                Text("Parasite Detection")
+                Text(localization.localizedString(for: "parasite_detection"))
                     .font(.largeTitle.bold())
                 
-                Text("Capture microscopic images of dog feces samples to detect parasitic infections.")
+                Text(localization.localizedString(for: "capture_description"))
                     .font(.body)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.secondary)
@@ -79,11 +80,17 @@ struct HomeView: View {
                 
                 // Steps
                 VStack(alignment: .leading, spacing: 15) {
-                    stepView(number: 1, title: "Prepare Sample", description: "Place the sample under the DIPLE lens attached to your phone")
+                    stepView(number: 1, 
+                             title: localization.localizedString(for: "step_1_title"), 
+                             description: localization.localizedString(for: "step_1_description"))
                     
-                    stepView(number: 2, title: "Capture Image", description: "Adjust light and focus for a clear image")
+                    stepView(number: 2, 
+                             title: localization.localizedString(for: "step_2_title"), 
+                             description: localization.localizedString(for: "step_2_description"))
                     
-                    stepView(number: 3, title: "Analyze", description: "AI will analyze the image to detect parasites")
+                    stepView(number: 3, 
+                             title: localization.localizedString(for: "step_3_title"), 
+                             description: localization.localizedString(for: "step_3_description"))
                 }
                 .padding()
                 .background(Color(.secondarySystemBackground))
@@ -99,14 +106,14 @@ struct HomeView: View {
                     HStack {
                         Image(systemName: "camera.viewfinder")
                             .font(.headline)
-                        Text("Begin Scan")
+                        Text(localization.localizedString(for: "begin_scan"))
                             .font(.headline)
                     }
                     .primaryButtonStyle()
                 }
                 .padding(.bottom, 30)
             }
-            .navigationTitle("New Scan")
+            .navigationTitle(localization.localizedString(for: "new_scan"))
             .navigationBarTitleDisplayMode(.inline)
         }
     }
@@ -141,16 +148,16 @@ struct HomeView: View {
                     if granted {
                         showCameraView = true
                     } else {
-                        permissionAlertMessage = "Camera access is required to capture microscopic images."
+                        permissionAlertMessage = localization.localizedString(for: "camera_permission_message")
                         showPermissionsAlert = true
                     }
                 }
             }
         case .denied, .restricted:
-            permissionAlertMessage = "Camera access is required to capture microscopic images. Please enable it in Settings."
+            permissionAlertMessage = localization.localizedString(for: "camera_permission_denied")
             showPermissionsAlert = true
         @unknown default:
-            permissionAlertMessage = "Unknown camera authorization status. Please check your privacy settings."
+            permissionAlertMessage = localization.localizedString(for: "unknown_permission_status")
             showPermissionsAlert = true
         }
     }
