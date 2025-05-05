@@ -1,9 +1,11 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @StateObject private var viewModel = SettingsViewModel.shared
+    @ObservedObject private var viewModel = SettingsViewModel.shared
     @State private var showResetConfirmation = false
+    @State private var showLogoutConfirmation = false
     private let localization = LocalizationManager.shared
+    private let userManager = UserManager.shared
     
     var body: some View {
         NavigationStack {
@@ -61,6 +63,20 @@ struct SettingsView: View {
                     }
                 }
                 
+                // Account
+                Section(header: Text.localized("account")) {
+                    Button(role: .destructive) {
+                        showLogoutConfirmation = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                            Text(localization.localizedString(for: "logout"))
+                        }
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .foregroundColor(.red)
+                    }
+                }
+                
                 // About
                 Section(header: Text.localized("about")) {
                     HStack {
@@ -104,11 +120,23 @@ struct SettingsView: View {
             } message: {
                 Text(localization.localizedString(for: "Are you sure you want to reset all settings to default values?"))
             }
+            .alert(localization.localizedString(for: "logout_confirmation"), isPresented: $showLogoutConfirmation) {
+                Button(localization.localizedString(for: "cancel"), role: .cancel) { }
+                Button(localization.localizedString(for: "logout"), role: .destructive) {
+                    logout()
+                }
+            } message: {
+                Text(localization.localizedString(for: "Are you sure you want to log out?"))
+            }
         }
         .preferredColorScheme(viewModel.colorSchemePreference.colorScheme)
         .environment(\.locale, Locale(identifier: viewModel.currentLanguage.rawValue))
         .dynamicTypeSize(viewModel.largeDisplayMode ? .xxxLarge : .large)
         .highContrastEnabled(viewModel.highContrastMode) // Apply high contrast using a custom modifier
+    }
+    
+    private func logout() {
+        userManager.setLoggedIn(false)
     }
 }
 

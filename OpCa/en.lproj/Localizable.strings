@@ -119,6 +119,10 @@
 "notifications" = "Notifications";
 "language" = "Language";
 "app_language" = "App Language";
+"account" = "Account";
+"logout" = "Logout";
+"logout_confirmation" = "Confirm Logout";
+"Are you sure you want to log out?" = "Are you sure you want to log out?";
 "about" = "About";
 "version" = "Version";
 "about_opca" = "About OpCa";

@@ -119,6 +119,10 @@
 "notifications" = "Bildirimler";
 "language" = "Dil";
 "app_language" = "Uygulama Dili";
+"account" = "Hesap";
+"logout" = "Çıkış Yap";
+"logout_confirmation" = "Çıkış Onayı";
+"Are you sure you want to log out?" = "Çıkış yapmak istediğinizden emin misiniz?";
 "about" = "Hakkında";
 "version" = "Sürüm";
 "about_opca" = "OpCa Hakkında";

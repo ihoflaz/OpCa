@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct RegistrationView: View {
-    @State private var viewModel = RegistrationViewModel()
+    @Bindable var viewModel = RegistrationViewModel()
     @Environment(\.dismiss) private var dismiss
     private let localization = LocalizationManager.shared
     

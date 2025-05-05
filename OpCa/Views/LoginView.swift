@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var viewModel = LoginViewModel()
+    @Bindable var viewModel = LoginViewModel()
     @Environment(\.locale) private var locale
     private let localization = LocalizationManager.shared
     

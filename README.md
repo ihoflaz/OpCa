@@ -17,6 +17,11 @@ OpCa is a modern mobile application designed for veterinarians to diagnose paras
 
 ## Screenshots
 
+### Login & Authentication
+Secure user authentication with registration and password reset functionality.
+
+![Login Screen](./screenshots/login_screen.jpeg)
+
 ### Dashboard
 Overview of statistics and recent scans with intuitive visualizations.
 
@@ -125,7 +130,7 @@ Adding a new language is straightforward:
 
 For questions or support, please contact:
 
-İbrahim Hulusi Oflaz - [Mail to me](mailto:hulusioflaz200@gmail.com)
+İbrahim Hulusi Oflaz - [contact@example.com](mailto:contact@example.com)
 
 ## License
 

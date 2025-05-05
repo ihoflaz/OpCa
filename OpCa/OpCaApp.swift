@@ -15,7 +15,7 @@ extension Notification.Name {
 
 @main
 struct OpCaApp: App {
-    @StateObject private var settingsViewModel = SettingsViewModel.shared
+    @State private var settingsViewModel = SettingsViewModel.shared
     @AppStorage("didPopulateSampleData") private var didPopulateSampleData = false
     
     // Ayarların değiştiğini takip etmek için
@@ -23,6 +23,7 @@ struct OpCaApp: App {
     @State private var highContrastModeEnabled = false
     @State private var currentLocale = Locale(identifier: "en")
     @State private var refreshView = false
+    @State private var hasSampledDataBeenChecked = false
     
     // Authentication state
     @State private var userManager = UserManager.shared
@@ -64,10 +65,10 @@ struct OpCaApp: App {
                         .environment(\.locale, currentLocale)
                         .dynamicTypeSize(settingsViewModel.largeDisplayMode ? .xxxLarge : .large)
                         .highContrastEnabled(highContrastModeEnabled) // Apply high contrast using custom modifier
-                        .onAppear {
-                            // Demo verileri sadece ilk çalıştırmada ekle
-                            if !didPopulateSampleData {
-                                addSampleDataIfNeeded()
+                        .task {
+                            if !didPopulateSampleData && !hasSampledDataBeenChecked {
+                                hasSampledDataBeenChecked = true
+                                await addSampleDataIfNeeded()
                             }
                         }
                 } else {
@@ -77,6 +78,12 @@ struct OpCaApp: App {
                         .environment(\.locale, currentLocale)
                         .dynamicTypeSize(settingsViewModel.largeDisplayMode ? .xxxLarge : .large)
                         .highContrastEnabled(highContrastModeEnabled)
+                        .task {
+                            if !didPopulateSampleData && !hasSampledDataBeenChecked {
+                                hasSampledDataBeenChecked = true
+                                await addSampleDataIfNeeded()
+                            }
+                        }
                 }
             } else {
                 // Show splash screen while initializing
@@ -133,30 +140,28 @@ struct OpCaApp: App {
     }
     
     // Demo verileri ekleyen fonksiyon
-    private func addSampleDataIfNeeded() {
+    private func addSampleDataIfNeeded() async {
         // Swift 6.0'da mainContext async bir özellik olduğu için Task içinde kullanmalıyız
-        Task {
-            let context = await sharedModelContainer.mainContext
-            
-            // SwiftData üzerinden demo verileri ekle
-            await MainActor.run {
-                // Önce mevcut veri var mı kontrol et
-                let descriptor = FetchDescriptor<Analysis>()
-                do {
-                    let count = try context.fetchCount(descriptor)
-                    if count == 0 {
-                        // Veri yoksa ekle
-                        SampleDataGenerator.populateSampleData(context: context)
-                        // Bir daha eklememek için flag'i güncelle
-                        didPopulateSampleData = true
-                    } else {
-                        // Veri zaten var
-                        print("Veriler zaten mevcut, demo veri ekleme atlanıyor")
-                        didPopulateSampleData = true
-                    }
-                } catch {
-                    print("Veri kontrolü sırasında hata: \(error.localizedDescription)")
+        let context = await sharedModelContainer.mainContext
+        
+        // SwiftData üzerinden demo verileri ekle
+        await MainActor.run {
+            // Önce mevcut veri var mı kontrol et
+            let descriptor = FetchDescriptor<Analysis>()
+            do {
+                let count = try context.fetchCount(descriptor)
+                if count == 0 {
+                    // Veri yoksa ekle
+                    SampleDataGenerator.populateSampleData(context: context)
+                    // Bir daha eklememek için flag'i güncelle
+                    didPopulateSampleData = true
+                } else {
+                    // Veri zaten var
+                    print("Veriler zaten mevcut, demo veri ekleme atlanıyor")
+                    didPopulateSampleData = true
                 }
+            } catch {
+                print("Veri kontrolü sırasında hata: \(error.localizedDescription)")
             }
         }
     }
