@@ -3,7 +3,7 @@ import AVFoundation
 
 struct HomeView: View {
     @State private var showCameraView = false
-    @State private var selectedImage: Data?
+    @State private var selectedImage: IdentifiableData?
     @State private var showSettings = false
     @State private var showPermissionsAlert = false
     @State private var permissionAlertMessage = ""
@@ -36,12 +36,12 @@ struct HomeView: View {
         }
         .sheet(isPresented: $showCameraView) {
             CameraView { imageData in
-                selectedImage = imageData
+                selectedImage = IdentifiableData(data: imageData)
             }
         }
-        .fullScreenCover(item: $selectedImage) { imageData in
+        .fullScreenCover(item: $selectedImage) { identifiableData in
             NavigationStack {
-                AnalysisProcessingView(imageData: imageData)
+                AnalysisProcessingView(imageData: identifiableData.data)
             }
         }
         .alert(isPresented: $showPermissionsAlert) {
@@ -160,9 +160,18 @@ struct HomeView: View {
     }
 }
 
-extension Data: Identifiable {
-    public var id: String {
-        base64EncodedString()
+// Swift 6 için çakışma olmayan bir yaklaşım
+struct IdentifiableData: Identifiable {
+    let data: Data
+    
+    var id: String {
+        data.base64EncodedString()
+    }
+}
+
+extension Data {
+    var asIdentifiable: IdentifiableData {
+        IdentifiableData(data: self)
     }
 }
 

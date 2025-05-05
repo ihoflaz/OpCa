@@ -34,7 +34,9 @@ extension CameraError: LocalizedError {
 
 @Observable
 class CameraService {
-    private var session: AVCaptureSession?
+    static let shared = CameraService()
+    
+    let session = AVCaptureSession()
     private var device: AVCaptureDevice?
     private var input: AVCaptureDeviceInput?
     private var output: AVCapturePhotoOutput?
@@ -46,7 +48,7 @@ class CameraService {
     var torchLevel: Float = 0.5
     var focusLevel: Float = 0.5
     
-    init() {
+    private init() {
         checkPermissions()
     }
     
@@ -72,9 +74,13 @@ class CameraService {
         case .notDetermined:
             Task {
                 if await AVCaptureDevice.requestAccess(for: .video) {
-                    setupCamera()
+                    await MainActor.run {
+                        setupCamera()
+                    }
                 } else {
-                    self.error = .deniedAuthorization
+                    await MainActor.run {
+                        self.error = .deniedAuthorization
+                    }
                 }
             }
         case .denied:
@@ -87,9 +93,6 @@ class CameraService {
     }
     
     private func setupCamera() {
-        self.session = AVCaptureSession()
-        guard let session = session else { return }
-        
         session.beginConfiguration()
         
         // Set the quality level
@@ -133,20 +136,20 @@ class CameraService {
     }
     
     func startSession() {
-        guard let session = session, !session.isRunning else { return }
+        guard !session.isRunning else { return }
         
         Task.detached { @MainActor in
-            session.startRunning()
-            self.isRunning = session.isRunning
+            self.session.startRunning()
+            self.isRunning = self.session.isRunning
         }
     }
     
     func stopSession() {
-        guard let session = session, session.isRunning else { return }
+        guard session.isRunning else { return }
         
         Task.detached { @MainActor in
-            session.stopRunning()
-            self.isRunning = session.isRunning
+            self.session.stopRunning()
+            self.isRunning = self.session.isRunning
         }
     }
     
@@ -215,8 +218,11 @@ class CameraService {
             return
         }
         
-        // Basit bir fotoğraf ayarı kullan, özel codec belirtme
+        // Create standard photo settings without specifying codec 
         let settings = AVCapturePhotoSettings()
+        
+        // Explicitly disable HEVC format for iOS 18.4 compatibility
+        settings.photoQualityPrioritization = .balanced
         
         output.capturePhoto(with: settings, delegate: PhotoCaptureProcessor { result in
             switch result {

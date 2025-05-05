@@ -3,7 +3,7 @@ import AVFoundation
 
 @Observable
 class CameraViewModel {
-    private let cameraService = CameraService()
+    private let cameraService = CameraService.shared
     
     var isCapturing = false
     var capturedImageData: Data?

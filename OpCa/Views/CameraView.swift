@@ -161,6 +161,7 @@ struct CameraView: View {
     }
 }
 
+// MARK: - Camera Preview View
 struct CameraPreviewView: UIViewRepresentable {
     class VideoPreviewView: UIView {
         override class var layerClass: AnyClass {
@@ -182,14 +183,9 @@ struct CameraPreviewView: UIViewRepresentable {
         view.backgroundColor = .black
         view.videoPreviewLayer.videoGravity = .resizeAspectFill
         
-        // Use the shared AVCaptureSession
-        if let session = (NSClassFromString("AVCaptureSession") as? AVCaptureSession.Type)?.init() {
-            view.session = session
-            
-            Task {
-                session.startRunning()
-            }
-        }
+        // Connect to CameraService's session
+        let cameraService = CameraService.shared
+        view.session = cameraService.session
         
         return view
     }
@@ -197,6 +193,178 @@ struct CameraPreviewView: UIViewRepresentable {
     func updateUIView(_ uiView: VideoPreviewView, context: Context) {}
 }
 
+// MARK: - Mock Camera Preview
+private struct MockCameraPreviewView: View {
+    var body: some View {
+        ZStack {
+            Color.black
+            
+            VStack {
+                Image(systemName: "camera.viewfinder")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(.white.opacity(0.5))
+                
+                Text("Camera Preview")
+                    .foregroundColor(.white.opacity(0.5))
+                    .padding(.top)
+                
+                Text("Preview Mode")
+                    .foregroundColor(.white.opacity(0.3))
+                    .font(.caption)
+            }
+        }
+    }
+}
+
+// MARK: - Static Preview for Xcode Canvas
+struct StaticCameraPreview: View {
+    // Mock sample image for the review screen
+    @State private var showReviewScreen = false
+    
+    var body: some View {
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            
+            if showReviewScreen {
+                // Mock review screen
+                Color.black.opacity(0.8)
+                    .edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    Text("Review Capture")
+                        .font(.title2.bold())
+                        .foregroundStyle(.white)
+                    
+                    // Use SF Symbol as placeholder for image
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.gray.opacity(0.2))
+                            .frame(height: 300)
+                        
+                        Image(systemName: "photo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 100)
+                            .foregroundColor(.white.opacity(0.7))
+                    }
+                    .padding()
+                    
+                    Text("Is the image clear enough?")
+                        .foregroundStyle(.white)
+                    
+                    HStack(spacing: 20) {
+                        Button("Retake") {
+                            showReviewScreen = false
+                        }
+                        .secondaryButtonStyle()
+                        
+                        Button("Use Photo") {}
+                        .primaryButtonStyle()
+                    }
+                    .padding(.top)
+                }
+                .padding()
+            } else {
+                VStack {
+                    // Top controls
+                    HStack {
+                        Button(action: {}) {
+                            Image(systemName: "xmark")
+                                .font(.title2)
+                                .foregroundStyle(.white)
+                                .padding()
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                        }
+                        
+                        Spacer()
+                        
+                        Button(action: {}) {
+                            Image(systemName: "flashlight.off.fill")
+                                .font(.title2)
+                                .foregroundStyle(.white)
+                                .padding()
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                        }
+                    }
+                    .padding()
+                    
+                    Spacer()
+                    
+                    // Mock camera view
+                    MockCameraPreviewView()
+                    
+                    Spacer()
+                    
+                    // Bottom controls
+                    VStack(spacing: 20) {
+                        // Light intensity slider
+                        VStack(spacing: 10) {
+                            HStack {
+                                Image(systemName: "sun.min.fill")
+                                    .foregroundStyle(.white)
+                                
+                                Slider(value: .constant(0.5), in: 0.1...1.0)
+                                    .tint(.white)
+                                
+                                Image(systemName: "sun.max.fill")
+                                    .foregroundStyle(.white)
+                            }
+                            
+                            Text("Light Intensity")
+                                .font(.caption)
+                                .foregroundStyle(.white)
+                        }
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        
+                        // Focus slider
+                        VStack(spacing: 10) {
+                            HStack {
+                                Image(systemName: "camera.macro")
+                                    .foregroundStyle(.white)
+                                
+                                Slider(value: .constant(0.5), in: 0.0...1.0)
+                                    .tint(.white)
+                                
+                                Image(systemName: "camera.macro.circle")
+                                    .foregroundStyle(.white)
+                            }
+                            
+                            Text("Focus")
+                                .font(.caption)
+                                .foregroundStyle(.white)
+                        }
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        
+                        // Capture button
+                        Button(action: { showReviewScreen = true }) {
+                            ZStack {
+                                Circle()
+                                    .strokeBorder(.white, lineWidth: 3)
+                                    .frame(width: 70, height: 70)
+                                
+                                Circle()
+                                    .fill(.white)
+                                    .frame(width: 60, height: 60)
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 30)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Preview
 #Preview {
-    CameraView { _ in }
+    StaticCameraPreview()
 } 
