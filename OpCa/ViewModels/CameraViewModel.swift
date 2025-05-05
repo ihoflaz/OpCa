@@ -1,14 +1,16 @@
 import SwiftUI
 import AVFoundation
+import Combine
 
-@Observable
-class CameraViewModel {
+class CameraViewModel: ObservableObject {
     private let cameraService = CameraService.shared
+    // Capture processor'ı sınıf düzeyinde sakla
+    private var photoCaptureProcessor: PhotoCaptureProcessor?
     
-    var isCapturing = false
-    var capturedImageData: Data?
-    var errorMessage: String?
-    var showErrorAlert = false
+    @Published var isCapturing = false
+    @Published var capturedImageData: Data?
+    @Published var errorMessage: String?
+    @Published var showErrorAlert = false
     
     var isTorchOn: Bool {
         cameraService.isTorchOn
@@ -34,6 +36,7 @@ class CameraViewModel {
     
     func toggleTorch() {
         cameraService.toggleTorch()
+        objectWillChange.send()
     }
     
     func capturePhoto() {
@@ -50,7 +53,8 @@ class CameraViewModel {
         }
         #else
         // Gerçek cihazda kamera kullan
-        cameraService.capturePhoto { [weak self] result in
+        // PhotoCaptureProcessor'ı sakla
+        let photoCaptureProcessor = PhotoCaptureProcessor { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
@@ -68,11 +72,19 @@ class CameraViewModel {
                 }
             }
         }
+        
+        // Referansı kaydet
+        self.photoCaptureProcessor = photoCaptureProcessor
+        
+        // Fotoğraf çek
+        cameraService.capturePhoto(with: photoCaptureProcessor)
         #endif
     }
     
     func resetCapture() {
         capturedImageData = nil
+        // Fotoğraf işlemcisini temizle
+        photoCaptureProcessor = nil
     }
     
     /// Demo amaçlı: Demo görüntü yükleme

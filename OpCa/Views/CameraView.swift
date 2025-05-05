@@ -1,8 +1,9 @@
 import SwiftUI
 import AVFoundation
+import Combine
 
 struct CameraView: View {
-    @State private var viewModel = CameraViewModel()
+    @StateObject private var viewModel = CameraViewModel()
     @Environment(\.dismiss) private var dismiss
     
     var onImageCaptured: (Data) -> Void
@@ -93,7 +94,16 @@ struct CameraView: View {
                     
                     // Capture button
                     Button(action: {
+                        #if targetEnvironment(simulator)
+                        // Simulasyonda kısa bir gecikme ekleyerek 
+                        // fotoğraf çekme animasyonu oluştur
+                        withAnimation {
+                            viewModel.capturePhoto()
+                        }
+                        #else
+                        // Gerçek cihazda normal çekimi uygula
                         viewModel.capturePhoto()
+                        #endif
                     }) {
                         ZStack {
                             Circle()
@@ -106,6 +116,8 @@ struct CameraView: View {
                         }
                     }
                     .disabled(viewModel.isCapturing)
+                    .scaleEffect(viewModel.isCapturing ? 0.8 : 1.0)
+                    .animation(.easeInOut(duration: 0.2), value: viewModel.isCapturing)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 30)
@@ -128,6 +140,7 @@ struct CameraView: View {
                         .frame(height: 300)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .padding()
+                        .shadow(radius: 10)
                     
                     Text("Is the image clear enough?")
                         .foregroundStyle(.white)
@@ -149,6 +162,8 @@ struct CameraView: View {
                     .padding(.top)
                 }
                 .padding()
+                .transition(.opacity)
+                .animation(.easeInOut, value: viewModel.capturedImageData != nil)
             }
         }
         .alert(isPresented: $viewModel.showErrorAlert) {

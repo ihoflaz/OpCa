@@ -5,20 +5,29 @@ struct AnalysisProcessingView: View {
     @State private var viewModel = AnalysisViewModel()
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @FocusState private var focusedField: FocusField?
+    
+    enum FocusField {
+        case location, notes
+    }
     
     let imageData: Data
     
     var body: some View {
-        VStack(spacing: 20) {
-            switch viewModel.analysisState {
-            case .ready, .processing:
-                processingView
-            case .completed:
-                resultsView
-            case .failed:
-                errorView
+        ScrollView {
+            VStack(spacing: 20) {
+                switch viewModel.analysisState {
+                case .ready, .processing:
+                    processingView
+                case .completed:
+                    resultsView
+                case .failed:
+                    errorView
+                }
             }
+            .padding()
         }
+        .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Analysis")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -28,6 +37,13 @@ struct AnalysisProcessingView: View {
                         dismiss()
                     }
                 }
+            }
+            
+            ToolbarItem(placement: .keyboard) {
+                Button("Done") {
+                    focusedField = nil
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
         .alert(isPresented: $viewModel.showError) {
@@ -73,7 +89,7 @@ struct AnalysisProcessingView: View {
             Spacer()
             Spacer()
         }
-        .padding()
+        .frame(minHeight: 500)
     }
     
     private var resultsView: some View {
@@ -125,29 +141,32 @@ struct AnalysisProcessingView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             }
             
-            Spacer()
+            Spacer(minLength: 20)
             
             VStack(spacing: 15) {
                 TextField("Location (optional)", text: $viewModel.location)
                     .padding()
                     .background(Color(.secondarySystemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .focused($focusedField, equals: .location)
                 
                 TextField("Notes (optional)", text: $viewModel.notes)
                     .padding()
                     .background(Color(.secondarySystemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .focused($focusedField, equals: .notes)
                 
                 Button("Save Analysis") {
+                    focusedField = nil
                     if viewModel.saveAnalysis(context: modelContext) != nil {
                         dismiss()
                     }
                 }
                 .primaryButtonStyle()
+                .padding(.vertical, 10)
             }
             .padding(.top)
         }
-        .padding()
     }
     
     private var errorView: some View {
@@ -181,7 +200,7 @@ struct AnalysisProcessingView: View {
             Spacer()
             Spacer()
         }
-        .padding()
+        .frame(minHeight: 500)
     }
 }
 

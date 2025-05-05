@@ -212,9 +212,10 @@ class CameraService {
         }
     }
     
-    func capturePhoto(completion: @escaping (Result<Data, Error>) -> Void) {
+    // Doğrudan delegate kullanarak fotoğraf çekin
+    func capturePhoto(with processor: PhotoCaptureProcessor) {
         guard let output = output else {
-            completion(.failure(CameraError.cannotAddOutput))
+            processor.completion(.failure(CameraError.cannotAddOutput))
             return
         }
         
@@ -224,23 +225,25 @@ class CameraService {
         // Explicitly disable HEVC format for iOS 18.4 compatibility
         settings.photoQualityPrioritization = .balanced
         
-        output.capturePhoto(with: settings, delegate: PhotoCaptureProcessor { result in
-            switch result {
-            case .success(let data):
-                self.photoData = data
-                completion(.success(data))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        })
+        // Fotoğraf çekin ve processor'a delegate edin
+        output.capturePhoto(with: settings, delegate: processor)
+    }
+    
+    // Eski metod, geriye dönük uyumluluk için tuttuk
+    func capturePhoto(completion: @escaping (Result<Data, Error>) -> Void) {
+        // Yeni bir processor oluşturun
+        let processor = PhotoCaptureProcessor(completion: completion)
+        // Yeni metodu çağırın
+        capturePhoto(with: processor)
     }
 }
 
 class PhotoCaptureProcessor: NSObject, AVCapturePhotoCaptureDelegate {
-    private let completion: (Result<Data, Error>) -> Void
+    let completion: (Result<Data, Error>) -> Void
     
     init(completion: @escaping (Result<Data, Error>) -> Void) {
         self.completion = completion
+        super.init()
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
