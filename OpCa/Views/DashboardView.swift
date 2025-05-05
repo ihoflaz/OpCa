@@ -57,11 +57,17 @@ struct DashboardView: View {
             }
             .overlay {
                 if analyses.isEmpty {
-                    ContentUnavailableView(
-                        "No Analysis Data",
-                        systemImage: "doc.text.magnifyingglass",
-                        description: Text("Start by capturing a sample image to analyze it for parasites")
-                    )
+                    ContentUnavailableView {
+                        Label("No Analysis Data", systemImage: "doc.text.magnifyingglass")
+                    } description: {
+                        Text("Start by capturing a sample image to analyze it for parasites")
+                    } actions: {
+                        // Demo veri yoksa, oluşturmak için buton ekle
+                        Button("Create Demo Data") {
+                            SampleDataGenerator.populateSampleData(context: modelContext)
+                        }
+                        .primaryButtonStyle()
+                    }
                 }
             }
             .refreshable {

@@ -88,6 +88,13 @@ struct CameraView: View {
                     // Capture button
                     Button(action: {
                         viewModel.capturePhoto()
+                        
+                        // Simülatörde gerçek kamera olmadığı için demo görüntü yükle
+                        #if targetEnvironment(simulator)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            viewModel.loadDemoImage()
+                        }
+                        #endif
                     }) {
                         ZStack {
                             Circle()

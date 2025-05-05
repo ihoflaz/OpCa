@@ -31,6 +31,23 @@ struct OpCaApp: App {
                 .modelContainer(sharedModelContainer)
                 .preferredColorScheme(settingsViewModel.getColorScheme())
                 .environment(\.locale, Locale(identifier: settingsViewModel.currentLanguage.rawValue))
+                .onAppear {
+                    // Demo verileri ekle
+                    addSampleDataIfNeeded()
+                }
+        }
+    }
+    
+    // Demo verileri ekleyen fonksiyon
+    private func addSampleDataIfNeeded() {
+        let context = sharedModelContainer.mainContext
+        
+        // SwiftData üzerinden demo verileri ekle
+        Task {
+            // Demo verileri ana thread'de ekle
+            await MainActor.run {
+                SampleDataGenerator.populateSampleData(context: context)
+            }
         }
     }
 }
