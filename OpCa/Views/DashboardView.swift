@@ -6,6 +6,7 @@ struct DashboardView: View {
     @State private var viewModel = DashboardViewModel()
     @Environment(\.modelContext) private var modelContext
     @Query private var analyses: [Analysis]
+    @State private var showDeveloperOptions = false
     
     var body: some View {
         NavigationStack {
@@ -18,6 +19,11 @@ struct DashboardView: View {
                     if let summary = viewModel.analysisSummary {
                         visualizationView(summary: summary)
                     }
+                    
+                    // Developer Options (For Testing All Views)
+                    developerOptionsView
+                        .opacity(showDeveloperOptions ? 1 : 0)
+                        .frame(height: showDeveloperOptions ? nil : 0)
                     
                     // Recent analyses section
                     recentAnalysesView
@@ -35,6 +41,17 @@ struct DashboardView: View {
                         } label: {
                             Label("Upload", systemImage: "arrow.up.to.line")
                         }
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        withAnimation {
+                            showDeveloperOptions.toggle()
+                        }
+                    } label: {
+                        Image(systemName: "hammer.circle")
+                            .foregroundColor(showDeveloperOptions ? .blue : .gray)
                     }
                 }
             }
@@ -167,6 +184,85 @@ struct DashboardView: View {
         .padding()
         .background(Color(.secondarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+    
+    private var developerOptionsView: some View {
+        VStack(alignment: .leading, spacing: 15) {
+            Text("Developer Test Navigation")
+                .font(.headline)
+            
+            Text("Access all views directly for testing")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            
+            Divider()
+            
+            VStack(spacing: 12) {
+                // Mock data for testing
+                let mockImageData = UIImage(systemName: "photo")?.pngData().map { IdentifiableData(data: $0) }
+                let currentDate = Date()
+                let mockParasiteResults = [
+                    ParasiteResult(type: .neosporosis, confidence: 0.87, detectionDate: currentDate),
+                    ParasiteResult(type: .echinococcosis, confidence: 0.10, detectionDate: currentDate),
+                    ParasiteResult(type: .coenurosis, confidence: 0.03, detectionDate: currentDate)
+                ]
+                let mockAnalysis = Analysis(
+                    imageData: UIImage(systemName: "microscope")?.pngData(),
+                    location: "Test Location",
+                    timestamp: Date(),
+                    notes: "Test analysis",
+                    results: mockParasiteResults
+                )
+                
+                // Navigation buttons
+                NavigationLink(destination: CameraView { _ in }) {
+                    navButton(title: "Camera View", icon: "camera.fill")
+                }
+                
+                NavigationLink(destination: mockImageData.map { AnalysisProcessingView(imageData: $0.data) }) {
+                    navButton(title: "Analysis Processing View", icon: "waveform")
+                }
+                
+                NavigationLink(destination: AnalysisDetailView(analysis: mockAnalysis)) {
+                    navButton(title: "Analysis Detail View", icon: "doc.text.magnifyingglass")
+                }
+                
+                NavigationLink(destination: ParasiteInfoView(parasiteType: .neosporosis)) {
+                    navButton(title: "Parasite Info View (Neosporosis)", icon: "info.circle")
+                }
+                
+                NavigationLink(destination: ParasiteInfoView(parasiteType: .echinococcosis)) {
+                    navButton(title: "Parasite Info View (Echinococcosis)", icon: "info.circle")
+                }
+                
+                NavigationLink(destination: ParasiteInfoView(parasiteType: .coenurosis)) {
+                    navButton(title: "Parasite Info View (Coenurosis)", icon: "info.circle")
+                }
+            }
+        }
+        .padding()
+        .background(Color(.secondarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+    
+    private func navButton(title: String, icon: String) -> some View {
+        HStack {
+            Image(systemName: icon)
+                .frame(width: 24)
+            
+            Text(title)
+                .fontWeight(.medium)
+            
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+                .foregroundStyle(.secondary)
+        }
+        .padding(.vertical, 10)
+        .padding(.horizontal, 15)
+        .background(Color(.tertiarySystemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .contentShape(Rectangle())
     }
     
     private var recentAnalysesView: some View {
