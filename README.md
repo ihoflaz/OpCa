@@ -19,36 +19,36 @@ OpCa is a modern mobile application designed for veterinarians to diagnose paras
 ### Dashboard
 Overview of statistics and recent scans with intuitive visualizations.
 
-![Dashboard](./screenshots/dashboard.png)
+![Dashboard](./screenshots/dashboard.jpeg)
 
 ### Camera Capture
 Specialized camera interface optimized for microscopic imaging with DIPLE lenses.
 
-![Camera Screen](./screenshots/camera_screen.png)
+![Camera Screen](./screenshots/camera_screen.jpeg)
 
 ### Image Analysis Process
 Real-time progress display during AI analysis of captured samples.
 
-![Analysis Process](./screenshots/analysis_process.png)
+![Analysis Process](./screenshots/analysis_process.jpeg)
 
 ### Diagnosis Results
 Clear visualization of results with confidence levels for each parasite type.
 
-![Results Screen](./screenshots/results_screen.png)
+![Results Screen](./screenshots/results_screen.jpeg)
 
 ### New Scan
 
-![New Scan Screen](./screenshots/new_scan.png)
+![New Scan Screen](./screenshots/new_scan.jpeg)
 
 ### Analysis History
 Complete history of all analyses with filtering and search capabilities.
 
-![History Screen](./screenshots/history_screen.png)
+![History Screen](./screenshots/history_screen.jpeg)
 
 
 ### Setting
 
-![Settings Screen](./screenshots/settings.png)
+![Settings Screen](./screenshots/settings.jpeg)
 
 ## Technical Specifications
 
