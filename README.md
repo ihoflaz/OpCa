@@ -1,85 +1,131 @@
-# OpCa
+# OpCa - Veterinary Diagnostic Tool
 
-## Mobil Mikroskop ve Yapay Zeka Destekli Parazitik Hastalık Tanı Sistemi
+OpCa is a modern mobile application designed for veterinarians to diagnose parasitic infections in dogs using microscopic image analysis. By capturing images through DIPLE lenses attached to smartphones, the app utilizes AI technology to identify parasites such as Neosporosis, Echinococcosis, and Coenurosis in dog feces.
 
-Bu proje, köpek dışkısından bulaşan parazitik hastalıkların tespiti için düşük maliyetli, taşınabilir bir çözüm geliştirmeyi amaçlamaktadır.
+![OpCa Main Screen](./screenshots/home_screen.png)
 
-## İçindekiler
+## Features
 
-- [Proje Hakkında](#proje-hakkında)
-- [Amacı ve Yenilikçi Yönü](#amacı-ve-yenilikçi-yönü)
-- [Yöntem](#yöntem)
-- [Proje Yönetimi](#proje-yönetimi)
-- [Sanayi Odaklı Çıktılar ve Yaygın Etki](#sanayi-odaklı-çıktılar-ve-yaygın-etki)
-- [Kurulum](#kurulum)
-- [Kullanım](#kullanım)
-- [Katkıda Bulunma](#katkıda-bulunma)
-- [Lisans](#lisans)
-- [İletişim](#iletişim)
+- **Microscopic Image Capture**: Optimized camera interface for use with DIPLE light stands with light intensity and focus control
+- **AI-Powered Analysis**: Advanced image processing to detect parasitic infections
+- **Diagnosis Results**: Clear visual indicators with confidence percentages for each parasite type
+- **Multilingual Support**: Available in Turkish and English, with easy extension to other languages
+- **Veterinarian Dashboard**: User-friendly layout with recent results, statistics, and upload status
+- **Offline Functionality**: Works in field conditions with data synchronization when online
+- **Accessibility Features**: High contrast mode and large display settings
 
-## Proje Hakkında
+## Screenshots
 
-Bu proje, veterinerlik alanında parazitik hastalıkların hızlı, doğru ve düşük maliyetli teşhisini sağlamak amacıyla geliştirilmiştir. Mevcut sistemlerin aksine, taşınabilir ve kullanıcı dostu bir çözüm sunmaktadır.
+### Dashboard
+Overview of statistics and recent scans with intuitive visualizations.
 
-## Amacı ve Yenilikçi Yönü
+![Dashboard](./screenshots/dashboard.png)
 
-- **Amaç:** Neosporosis, Echinococcosis ve Coenurosis gibi hastalıkların teşhisi.
-- **Yenilikçi Yön:** Smart Micro Optics lensleri ve yapay zeka destekli mobil uygulama ile mikroskop ihtiyacını ortadan kaldırmak.
-- **Teknolojik Değer:** Düşük maliyetli ve taşınabilir çözüm ile geniş kullanım alanı.
+### Camera Capture
+Specialized camera interface optimized for microscopic imaging with DIPLE lenses.
 
-## Yöntem
+![Camera Screen](./screenshots/camera_screen.png)
 
-- **Donanım:** 
-  - DIPLE lensleri ile telefon kameralarını mikroskop olarak kullanma.
-  - Özel telefon standı ve ışık sistemi.
-- **Yapay Zeka:**
-  - CNN tabanlı derin öğrenme modelleri ile görüntü işleme.
-  - TensorFlow ve PyTorch kütüphaneleri kullanımı.
-- **Veri Toplama:**
-  - Açık erişimli veri setleri ve sahadan toplanan gerçek veriler.
+### Image Analysis Process
+Real-time progress display during AI analysis of captured samples.
 
-## Proje Yönetimi
+![Analysis Process](./screenshots/analysis_process.png)
 
-- **İş Paketleri:** Veri toplama, yazılım geliştirme, sistem testi.
-- **Zaman Çizelgesi:** Her iş paketi için belirli zaman aralıkları ve başarı ölçütleri.
-- **Risk Yönetimi:** Olası riskler ve çözüm planları.
+### Diagnosis Results
+Clear visualization of results with confidence levels for each parasite type.
 
-## Sanayi Odaklı Çıktılar ve Yaygın Etki
+![Results Screen](./screenshots/results_screen.png)
 
-- **Ekonomik Etki:** Veteriner kliniklerinin teşhis maliyetlerini düşürme.
-- **Toplumsal Etki:** Erken teşhis ile halk sağlığını koruma.
-- **Ticari Potansiyel:** Düşük maliyetli mikroskop çözümleri ve geniş uygulama alanı.
+### New Scan
 
-## Kurulum
+![New Scan Screen](./screenshots/new_scan.png)
 
-1. Gerekli yazılımları ve kütüphaneleri yükleyin.
-2. Proje dosyalarını indirin.
-3. Uygulamayı çalıştırmak için aşağıdaki komutları izleyin:
+### Analysis History
+Complete history of all analyses with filtering and search capabilities.
 
-   ```bash
-   git clone https://github.com/ihoflaz/OpCa.git
-   cd projeadi
-   ```
+![History Screen](./screenshots/history_screen.png)
 
-## Kullanım
 
-- **Mobil Uygulama:** Uygulamayı açın ve kamera lensini dışkı örneğine odaklayın.
-- **Görüntü İşleme:** Uygulama, yapay zeka modeli ile görüntüleri analiz edecektir.
-- **Sonuçlar:** Hastalık tespiti yapıldığında sonuçları görüntüleyin.
+### Setting
 
-## Katkıda Bulunma
+![Settings Screen](./screenshots/settings.png)
 
-1. Fork yaparak projeyi kopyalayın.
-2. Kendi dalınızı oluşturun: `git checkout -b yeni-ozellik`
-3. Değişikliklerinizi yapın ve commit edin: `git commit -m 'Yeni özellik ekle'`
-4. Dalınıza push yapın: `git push origin yeni-ozellik`
-5. Pull request açarak katkıda bulunun.
+## Technical Specifications
 
-## Lisans
+- **Platform**: iOS 18.4+
+- **Framework**: SwiftUI
+- **Language**: Swift 6.0
+- **Data Management**: SwiftData
+- **Architecture**: MVVM (Model-View-ViewModel)
+- **State Management**: @Observable, @Model, @State, @StateObject
+- **Concurrency**: Async/await pattern
+- **Networking**: Native URLSession 
+- **IDE**: Xcode 16.3
 
-Bu proje MIT Lisansı ile lisanslanmıştır. Daha fazla bilgi için `LICENSE` dosyasına bakın.
+## Installation
 
-## İletişim
+1. Clone the repository:
+```
+git clone https://github.com/yourusername/OpCa.git
+```
 
-Proje hakkında daha fazla bilgi için iletişime geçin: [hulusioflaz200@gmail.com](mailto:hulusioflaz200@gmail.com)
+2. Open the project in Xcode 16.3 or later
+```
+cd OpCa
+open OpCa.xcodeproj
+```
 
+3. Select a target device running iOS 18.4 or later
+
+4. Build and run the application
+
+## Project Structure
+
+```
+OpCa/
+├── Models/          # Data models and SwiftData entities
+├── Views/           # SwiftUI view components
+├── ViewModels/      # ViewModel classes for MVVM architecture
+├── Services/        # Network, camera, and other service classes
+├── Utilities/       # Helper functions and extensions
+│   ├── Localization/ # Localization resources
+│   └── Extensions/   # Swift extensions
+├── Data/            # Sample data generators and persistance helpers
+└── Resources/       # Assets, fonts, and other resources
+```
+
+## Localization
+
+OpCa supports multiple languages with a robust localization framework:
+
+- English (default)
+- Turkish
+
+Adding a new language is straightforward:
+1. Create a new `{language_code}.lproj` folder
+2. Add a `Localizable.strings` file with translated key-value pairs
+3. The app will automatically detect and use available translations
+
+## Future Development
+
+- Additional language support
+- Enhanced AI models for more parasitic species
+- Cloud synchronization for veterinary practices
+- Integration with laboratory information systems (LIS)
+- Interactive educational content for each parasite type
+
+## Acknowledgements
+
+- DIPLE for microscope lens technology
+- Veterinary research partners for parasite identification expertise
+- Open-source Swift community for helpful libraries and guidance
+
+## Contact
+
+For questions or support, please contact:
+
+İbrahim Hulusi Oflaz - [contact@example.com](mailto:contact@example.com)
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details. 
