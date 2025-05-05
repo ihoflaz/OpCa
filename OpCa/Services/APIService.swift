@@ -1,6 +1,6 @@
 import Foundation
 
-enum APIError: Error {
+enum ServiceError: Error {
     case invalidURL
     case invalidResponse
     case networkError(Error)
@@ -90,35 +90,35 @@ class APIService {
     
     func fetch<T: Decodable>(from endpoint: String) async throws -> T {
         guard let url = URL(string: "\(baseURL)/\(endpoint)") else {
-            throw APIError.invalidURL
+            throw ServiceError.invalidURL
         }
         
         do {
             let (data, response) = try await URLSession.shared.data(from: url)
             
             guard let httpResponse = response as? HTTPURLResponse else {
-                throw APIError.invalidResponse
+                throw ServiceError.invalidResponse
             }
             
             guard (200...299).contains(httpResponse.statusCode) else {
-                throw APIError.serverError(httpResponse.statusCode)
+                throw ServiceError.serverError(httpResponse.statusCode)
             }
             
             do {
                 return try JSONDecoder().decode(T.self, from: data)
             } catch {
-                throw APIError.decodingError(error)
+                throw ServiceError.decodingError(error)
             }
-        } catch let error as APIError {
+        } catch let error as ServiceError {
             throw error
         } catch {
-            throw APIError.networkError(error)
+            throw ServiceError.networkError(error)
         }
     }
     
     func post<T: Decodable, U: Encodable>(to endpoint: String, body: U) async throws -> T {
         guard let url = URL(string: "\(baseURL)/\(endpoint)") else {
-            throw APIError.invalidURL
+            throw ServiceError.invalidURL
         }
         
         var request = URLRequest(url: url)
@@ -131,22 +131,22 @@ class APIService {
             let (data, response) = try await URLSession.shared.data(for: request)
             
             guard let httpResponse = response as? HTTPURLResponse else {
-                throw APIError.invalidResponse
+                throw ServiceError.invalidResponse
             }
             
             guard (200...299).contains(httpResponse.statusCode) else {
-                throw APIError.serverError(httpResponse.statusCode)
+                throw ServiceError.serverError(httpResponse.statusCode)
             }
             
             do {
                 return try JSONDecoder().decode(T.self, from: data)
             } catch {
-                throw APIError.decodingError(error)
+                throw ServiceError.decodingError(error)
             }
-        } catch let error as APIError {
+        } catch let error as ServiceError {
             throw error
         } catch {
-            throw APIError.networkError(error)
+            throw ServiceError.networkError(error)
         }
     }
 } 

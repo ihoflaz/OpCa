@@ -136,4 +136,33 @@
 "privacy_policy" = "Gizlilik Politikası";
 "terms_of_use" = "Kullanım Koşulları";
 "licenses" = "Lisanslar";
-"copyright" = "© 2025 OpCa. Tüm hakları saklıdır."; 
+"copyright" = "© 2025 OpCa. Tüm hakları saklıdır.";
+
+// Auth & Login
+"login" = "Giriş";
+"logging_in" = "Giriş yapılıyor...";
+"login_error" = "Geçersiz kullanıcı adı veya şifre";
+"email_username" = "E-posta veya Kullanıcı Adı";
+"password" = "Şifre";
+"forgot_password" = "Şifrenizi mi unuttunuz?";
+"no_account" = "Hesabınız yok mu?";
+"register_now" = "Şimdi Kayıt Ol";
+"submit" = "Gönder";
+"enter_email_to_reset" = "E-posta adresinizi girin ve şifrenizi sıfırlamak için talimatları göndereceğiz.";
+
+// Registration
+"registration" = "Kayıt";
+"create_account" = "Hesap Oluştur";
+"registering" = "Kayıt yapılıyor...";
+"registration_error" = "Kayıt Hatası";
+"registration_failed" = "Kayıt başarısız oldu. Lütfen tekrar deneyin.";
+"registration_subtitle" = "OpCa'yı kullanmaya başlamak için hesabınızı oluşturun.";
+"full_name" = "Ad Soyad";
+"email" = "E-posta";
+"confirm_password" = "Şifreyi Onayla";
+"invalid_email" = "Lütfen geçerli bir e-posta adresi girin";
+"password_requirements" = "Şifre en az 8 karakter, 1 büyük harf, 1 küçük harf ve 1 rakam içermelidir";
+"passwords_not_match" = "Şifreler eşleşmiyor";
+"terms_agreement" = "Şartlar ve Koşulları kabul ediyorum";
+"already_have_account" = "Zaten hesabınız var mı? Giriş yapın";
+"ok" = "Tamam"; 

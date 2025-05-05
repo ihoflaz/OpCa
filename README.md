@@ -9,6 +9,7 @@ OpCa is a modern mobile application designed for veterinarians to diagnose paras
 - **Microscopic Image Capture**: Optimized camera interface for use with DIPLE light stands with light intensity and focus control
 - **AI-Powered Analysis**: Advanced image processing to detect parasitic infections
 - **Diagnosis Results**: Clear visual indicators with confidence percentages for each parasite type
+- **Secure Authentication**: User registration and login with secure token management
 - **Multilingual Support**: Available in Turkish and English, with easy extension to other languages
 - **Veterinarian Dashboard**: User-friendly layout with recent results, statistics, and upload status
 - **Offline Functionality**: Works in field conditions with data synchronization when online
@@ -124,7 +125,7 @@ Adding a new language is straightforward:
 
 For questions or support, please contact:
 
-İbrahim Hulusi Oflaz - [contact@example.com](mailto:contact@example.com)
+İbrahim Hulusi Oflaz - [Mail to me](mailto:hulusioflaz200@gmail.com)
 
 ## License
 

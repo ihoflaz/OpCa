@@ -136,4 +136,33 @@
 "privacy_policy" = "Privacy Policy";
 "terms_of_use" = "Terms of Use";
 "licenses" = "Licenses";
-"copyright" = "© 2025 OpCa. All rights reserved."; 
+"copyright" = "© 2025 OpCa. All rights reserved.";
+
+// Auth & Login
+"login" = "Login";
+"logging_in" = "Logging in...";
+"login_error" = "Invalid username or password";
+"email_username" = "Email or Username";
+"password" = "Password";
+"forgot_password" = "Forgot Password?";
+"no_account" = "Don't have an account?";
+"register_now" = "Register Now";
+"submit" = "Submit";
+"enter_email_to_reset" = "Enter your email address and we'll send you instructions to reset your password.";
+
+// Registration
+"registration" = "Registration";
+"create_account" = "Create Account";
+"registering" = "Registering...";
+"registration_error" = "Registration Error";
+"registration_failed" = "Registration failed. Please try again.";
+"registration_subtitle" = "Create your account to start using OpCa.";
+"full_name" = "Full Name";
+"email" = "Email";
+"confirm_password" = "Confirm Password";
+"invalid_email" = "Please enter a valid email address";
+"password_requirements" = "Password must be at least 8 characters with 1 uppercase, 1 lowercase and 1 number";
+"passwords_not_match" = "Passwords do not match";
+"terms_agreement" = "I agree to the Terms and Conditions";
+"already_have_account" = "Already have an account? Login";
+"ok" = "OK"; 
