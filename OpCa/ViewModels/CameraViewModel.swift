@@ -42,6 +42,14 @@ class CameraViewModel {
         isCapturing = true
         print("Fotoğraf çekme başlatıldı")
         
+        #if targetEnvironment(simulator)
+        // Simulatörde gerçek kamera olmadığı için demo görüntü yükle
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.loadDemoImage()
+            self.isCapturing = false
+        }
+        #else
+        // Gerçek cihazda kamera kullan
         cameraService.capturePhoto { [weak self] result in
             guard let self = self else { return }
             
@@ -60,6 +68,7 @@ class CameraViewModel {
                 }
             }
         }
+        #endif
     }
     
     func resetCapture() {
@@ -68,12 +77,35 @@ class CameraViewModel {
     
     /// Demo amaçlı: Demo görüntü yükleme
     func loadDemoImage() {
-        // Demo görüntü yükle
-        if let image = UIImage(systemName: "photo") {
-            if let data = image.jpegData(compressionQuality: 0.8) {
-                DispatchQueue.main.async {
-                    self.capturedImageData = data
-                }
+        // Simulatör için daha gerçekçi bir demo görüntü oluştur
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 300, height: 300))
+        let demoImage = renderer.image { context in
+            // Arka plan
+            UIColor.black.setFill()
+            context.fill(CGRect(x: 0, y: 0, width: 300, height: 300))
+            
+            // Mikroskobik görüntü simülasyonu
+            UIColor.darkGray.setStroke()
+            context.stroke(CGRect(x: 10, y: 10, width: 280, height: 280))
+            
+            // Ortada örnek parazit
+            UIColor.red.setFill()
+            context.fill(CGRect(x: 100, y: 100, width: 100, height: 100).insetBy(dx: 10, dy: 10))
+            
+            // Rastgele noktalar ekleme
+            for _ in 0..<20 {
+                let x = CGFloat.random(in: 20...280)
+                let y = CGFloat.random(in: 20...280)
+                let size = CGFloat.random(in: 5...15)
+                
+                UIColor.orange.setFill()
+                context.fill(CGRect(x: x, y: y, width: size, height: size))
+            }
+        }
+        
+        if let data = demoImage.jpegData(compressionQuality: 0.8) {
+            DispatchQueue.main.async {
+                self.capturedImageData = data
             }
         }
     }

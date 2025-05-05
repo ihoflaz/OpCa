@@ -11,6 +11,7 @@ import SwiftData
 @main
 struct OpCaApp: App {
     @State private var settingsViewModel = SettingsViewModel()
+    @AppStorage("didPopulateSampleData") private var didPopulateSampleData = false
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -32,8 +33,10 @@ struct OpCaApp: App {
                 .preferredColorScheme(settingsViewModel.getColorScheme())
                 .environment(\.locale, Locale(identifier: settingsViewModel.currentLanguage.rawValue))
                 .onAppear {
-                    // Demo verileri ekle
-                    addSampleDataIfNeeded()
+                    // Demo verileri sadece ilk çalıştırmada ekle
+                    if !didPopulateSampleData {
+                        addSampleDataIfNeeded()
+                    }
                 }
         }
     }
@@ -46,7 +49,23 @@ struct OpCaApp: App {
         Task {
             // Demo verileri ana thread'de ekle
             await MainActor.run {
-                SampleDataGenerator.populateSampleData(context: context)
+                // Önce mevcut veri var mı kontrol et
+                let descriptor = FetchDescriptor<Analysis>()
+                do {
+                    let count = try context.fetchCount(descriptor)
+                    if count == 0 {
+                        // Veri yoksa ekle
+                        SampleDataGenerator.populateSampleData(context: context)
+                        // Bir daha eklememek için flag'i güncelle
+                        didPopulateSampleData = true
+                    } else {
+                        // Veri zaten var
+                        print("Veriler zaten mevcut, demo veri ekleme atlanıyor")
+                        didPopulateSampleData = true
+                    }
+                } catch {
+                    print("Veri kontrolü sırasında hata: \(error.localizedDescription)")
+                }
             }
         }
     }

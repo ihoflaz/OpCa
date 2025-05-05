@@ -3,7 +3,6 @@ import AVFoundation
 
 struct CameraView: View {
     @State private var viewModel = CameraViewModel()
-    @State private var showConfirmation = false
     @Environment(\.dismiss) private var dismiss
     
     var onImageCaptured: (Data) -> Void
@@ -11,8 +10,15 @@ struct CameraView: View {
     var body: some View {
         ZStack {
             // Camera preview
+            #if targetEnvironment(simulator)
+            // For simulator, show static preview
+            MockCameraPreviewView()
+                .edgesIgnoringSafeArea(.all)
+            #else
+            // For real device, show camera preview
             CameraPreviewView()
                 .edgesIgnoringSafeArea(.all)
+            #endif
             
             VStack {
                 // Top controls
@@ -88,13 +94,6 @@ struct CameraView: View {
                     // Capture button
                     Button(action: {
                         viewModel.capturePhoto()
-                        
-                        // Simülatörde gerçek kamera olmadığı için demo görüntü yükle
-                        #if targetEnvironment(simulator)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            viewModel.loadDemoImage()
-                        }
-                        #endif
                     }) {
                         ZStack {
                             Circle()

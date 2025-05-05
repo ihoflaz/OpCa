@@ -39,11 +39,14 @@ struct AnalysisHistoryView: View {
     var body: some View {
         List {
             ForEach(filteredAnalyses) { analysis in
-                NavigationLink(destination: AnalysisDetailView(analysis: analysis)) {
+                NavigationLink {
+                    AnalysisDetailView(analysis: analysis)
+                } label: {
                     AnalysisHistoryRow(analysis: analysis)
                 }
             }
         }
+        .listStyle(PlainListStyle())
         .navigationTitle("Analysis History")
         .searchable(text: $searchText, prompt: "Search by location or notes")
         .overlay {
@@ -84,7 +87,8 @@ struct AnalysisHistoryRow: View {
     let analysis: Analysis
     
     var body: some View {
-        HStack {
+        HStack(spacing: 15) {
+            // Thumbnail image
             if let imageData = analysis.imageData,
                let uiImage = UIImage(data: imageData) {
                 Image(uiImage: uiImage)
@@ -102,9 +106,11 @@ struct AnalysisHistoryRow: View {
                     }
             }
             
+            // Content
             VStack(alignment: .leading, spacing: 4) {
                 Text(analysis.formattedDate)
                     .font(.headline)
+                    .foregroundStyle(.primary) // Explicitly set foreground
                 
                 if let dominantType = analysis.dominantParasite {
                     HStack {
@@ -126,10 +132,18 @@ struct AnalysisHistoryRow: View {
             
             Spacer()
             
-            // Upload status indicator
-            Image(systemName: analysis.isUploaded ? "checkmark.circle.fill" : "arrow.up.circle")
-                .foregroundStyle(analysis.isUploaded ? .green : .orange)
+            // Upload status indicator with chevron
+            HStack(spacing: 10) {
+                Image(systemName: analysis.isUploaded ? "checkmark.circle.fill" : "arrow.up.circle")
+                    .foregroundStyle(analysis.isUploaded ? .green : .orange)
+                
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+            }
         }
+        .contentShape(Rectangle()) // Make entire row tappable
+        .padding(.vertical, 4) // Add vertical padding
     }
 }
 

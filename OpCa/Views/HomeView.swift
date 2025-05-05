@@ -23,10 +23,12 @@ struct HomeView: View {
                 }
             
             // History Tab
-            AnalysisHistoryView()
-                .tabItem {
-                    Label("History", systemImage: "clock.arrow.circlepath")
-                }
+            NavigationStack {
+                AnalysisHistoryView()
+            }
+            .tabItem {
+                Label("History", systemImage: "clock.arrow.circlepath")
+            }
             
             // Settings Tab
             SettingsView()

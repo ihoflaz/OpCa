@@ -7,21 +7,6 @@ class SampleDataGenerator {
     
     /// ModelContext'e demo veriler ekler
     static func populateSampleData(context: ModelContext) {
-        // Eğer veriler zaten eklendiyse tekrar ekleme
-        let descriptor = FetchDescriptor<Analysis>()
-        let existingCount: Int
-        
-        do {
-            existingCount = try context.fetchCount(descriptor)
-            if existingCount > 0 {
-                print("Demo veriler zaten eklenmiş, tekrar ekleme atlanıyor")
-                return
-            }
-        } catch {
-            print("Demo veri kontrolü sırasında hata: \(error.localizedDescription)")
-            return
-        }
-        
         // Demo parazit görselleri için güvenli bir görsel oluşturma fonksiyonu
         func createSampleImage(color: Color) -> UIImage {
             let renderer = UIGraphicsImageRenderer(size: CGSize(width: 300, height: 300))
@@ -72,6 +57,8 @@ class SampleDataGenerator {
         // Geçmiş tarihler oluşturalım
         let calendar = Calendar.current
         var dateComponents = DateComponents()
+        
+        print("Demo veriler oluşturuluyor...")
         
         // Son 30 gün için demo veriler oluştur
         for i in 0..<15 {
