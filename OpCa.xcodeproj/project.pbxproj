@@ -7,53 +7,40 @@
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
-		5699B2D22CFDD2D800D88168 /* PBXContainerItemProxy */ = {
+		56B77E052DC842D500CF4570 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5699B2B32CFDD2D500D88168 /* Project object */;
+			containerPortal = 56B77DED2DC842D300CF4570 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5699B2BA2CFDD2D500D88168;
+			remoteGlobalIDString = 56B77DF42DC842D300CF4570;
 			remoteInfo = OpCa;
 		};
-		5699B2DC2CFDD2D800D88168 /* PBXContainerItemProxy */ = {
+		56B77E0F2DC842D500CF4570 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5699B2B32CFDD2D500D88168 /* Project object */;
+			containerPortal = 56B77DED2DC842D300CF4570 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5699B2BA2CFDD2D500D88168;
+			remoteGlobalIDString = 56B77DF42DC842D300CF4570;
 			remoteInfo = OpCa;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5699B2BB2CFDD2D600D88168 /* OpCa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpCa.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5699B2D12CFDD2D800D88168 /* OpCaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpCaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5699B2DB2CFDD2D800D88168 /* OpCaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpCaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		56B77DF52DC842D300CF4570 /* OpCa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpCa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		56B77E042DC842D500CF4570 /* OpCaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpCaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		56B77E0E2DC842D500CF4570 /* OpCaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpCaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		5699B2E32CFDD2D800D88168 /* Exceptions for "OpCa" folder in "OpCa" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 5699B2BA2CFDD2D500D88168 /* OpCa */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		5699B2BD2CFDD2D600D88168 /* OpCa */ = {
+		56B77DF72DC842D300CF4570 /* OpCa */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				5699B2E32CFDD2D800D88168 /* Exceptions for "OpCa" folder in "OpCa" target */,
-			);
 			path = OpCa;
 			sourceTree = "<group>";
 		};
-		5699B2D42CFDD2D800D88168 /* OpCaTests */ = {
+		56B77E072DC842D500CF4570 /* OpCaTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = OpCaTests;
 			sourceTree = "<group>";
 		};
-		5699B2DE2CFDD2D800D88168 /* OpCaUITests */ = {
+		56B77E112DC842D500CF4570 /* OpCaUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = OpCaUITests;
 			sourceTree = "<group>";
@@ -61,21 +48,21 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5699B2B82CFDD2D500D88168 /* Frameworks */ = {
+		56B77DF22DC842D300CF4570 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5699B2CE2CFDD2D800D88168 /* Frameworks */ = {
+		56B77E012DC842D500CF4570 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5699B2D82CFDD2D800D88168 /* Frameworks */ = {
+		56B77E0B2DC842D500CF4570 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -85,22 +72,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5699B2B22CFDD2D500D88168 = {
+		56B77DEC2DC842D300CF4570 = {
 			isa = PBXGroup;
 			children = (
-				5699B2BD2CFDD2D600D88168 /* OpCa */,
-				5699B2D42CFDD2D800D88168 /* OpCaTests */,
-				5699B2DE2CFDD2D800D88168 /* OpCaUITests */,
-				5699B2BC2CFDD2D600D88168 /* Products */,
+				56B77DF72DC842D300CF4570 /* OpCa */,
+				56B77E072DC842D500CF4570 /* OpCaTests */,
+				56B77E112DC842D500CF4570 /* OpCaUITests */,
+				56B77DF62DC842D300CF4570 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		5699B2BC2CFDD2D600D88168 /* Products */ = {
+		56B77DF62DC842D300CF4570 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5699B2BB2CFDD2D600D88168 /* OpCa.app */,
-				5699B2D12CFDD2D800D88168 /* OpCaTests.xctest */,
-				5699B2DB2CFDD2D800D88168 /* OpCaUITests.xctest */,
+				56B77DF52DC842D300CF4570 /* OpCa.app */,
+				56B77E042DC842D500CF4570 /* OpCaTests.xctest */,
+				56B77E0E2DC842D500CF4570 /* OpCaUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,134 +95,134 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5699B2BA2CFDD2D500D88168 /* OpCa */ = {
+		56B77DF42DC842D300CF4570 /* OpCa */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5699B2E42CFDD2D800D88168 /* Build configuration list for PBXNativeTarget "OpCa" */;
+			buildConfigurationList = 56B77E182DC842D500CF4570 /* Build configuration list for PBXNativeTarget "OpCa" */;
 			buildPhases = (
-				5699B2B72CFDD2D500D88168 /* Sources */,
-				5699B2B82CFDD2D500D88168 /* Frameworks */,
-				5699B2B92CFDD2D500D88168 /* Resources */,
+				56B77DF12DC842D300CF4570 /* Sources */,
+				56B77DF22DC842D300CF4570 /* Frameworks */,
+				56B77DF32DC842D300CF4570 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				5699B2BD2CFDD2D600D88168 /* OpCa */,
+				56B77DF72DC842D300CF4570 /* OpCa */,
 			);
 			name = OpCa;
 			packageProductDependencies = (
 			);
 			productName = OpCa;
-			productReference = 5699B2BB2CFDD2D600D88168 /* OpCa.app */;
+			productReference = 56B77DF52DC842D300CF4570 /* OpCa.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5699B2D02CFDD2D800D88168 /* OpCaTests */ = {
+		56B77E032DC842D500CF4570 /* OpCaTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5699B2E92CFDD2D800D88168 /* Build configuration list for PBXNativeTarget "OpCaTests" */;
+			buildConfigurationList = 56B77E1B2DC842D500CF4570 /* Build configuration list for PBXNativeTarget "OpCaTests" */;
 			buildPhases = (
-				5699B2CD2CFDD2D800D88168 /* Sources */,
-				5699B2CE2CFDD2D800D88168 /* Frameworks */,
-				5699B2CF2CFDD2D800D88168 /* Resources */,
+				56B77E002DC842D500CF4570 /* Sources */,
+				56B77E012DC842D500CF4570 /* Frameworks */,
+				56B77E022DC842D500CF4570 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5699B2D32CFDD2D800D88168 /* PBXTargetDependency */,
+				56B77E062DC842D500CF4570 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				5699B2D42CFDD2D800D88168 /* OpCaTests */,
+				56B77E072DC842D500CF4570 /* OpCaTests */,
 			);
 			name = OpCaTests;
 			packageProductDependencies = (
 			);
 			productName = OpCaTests;
-			productReference = 5699B2D12CFDD2D800D88168 /* OpCaTests.xctest */;
+			productReference = 56B77E042DC842D500CF4570 /* OpCaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		5699B2DA2CFDD2D800D88168 /* OpCaUITests */ = {
+		56B77E0D2DC842D500CF4570 /* OpCaUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5699B2EC2CFDD2D800D88168 /* Build configuration list for PBXNativeTarget "OpCaUITests" */;
+			buildConfigurationList = 56B77E1E2DC842D500CF4570 /* Build configuration list for PBXNativeTarget "OpCaUITests" */;
 			buildPhases = (
-				5699B2D72CFDD2D800D88168 /* Sources */,
-				5699B2D82CFDD2D800D88168 /* Frameworks */,
-				5699B2D92CFDD2D800D88168 /* Resources */,
+				56B77E0A2DC842D500CF4570 /* Sources */,
+				56B77E0B2DC842D500CF4570 /* Frameworks */,
+				56B77E0C2DC842D500CF4570 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5699B2DD2CFDD2D800D88168 /* PBXTargetDependency */,
+				56B77E102DC842D500CF4570 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				5699B2DE2CFDD2D800D88168 /* OpCaUITests */,
+				56B77E112DC842D500CF4570 /* OpCaUITests */,
 			);
 			name = OpCaUITests;
 			packageProductDependencies = (
 			);
 			productName = OpCaUITests;
-			productReference = 5699B2DB2CFDD2D800D88168 /* OpCaUITests.xctest */;
+			productReference = 56B77E0E2DC842D500CF4570 /* OpCaUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		5699B2B32CFDD2D500D88168 /* Project object */ = {
+		56B77DED2DC842D300CF4570 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1610;
-				LastUpgradeCheck = 1610;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
-					5699B2BA2CFDD2D500D88168 = {
-						CreatedOnToolsVersion = 16.1;
+					56B77DF42DC842D300CF4570 = {
+						CreatedOnToolsVersion = 16.3;
 					};
-					5699B2D02CFDD2D800D88168 = {
-						CreatedOnToolsVersion = 16.1;
-						TestTargetID = 5699B2BA2CFDD2D500D88168;
+					56B77E032DC842D500CF4570 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 56B77DF42DC842D300CF4570;
 					};
-					5699B2DA2CFDD2D800D88168 = {
-						CreatedOnToolsVersion = 16.1;
-						TestTargetID = 5699B2BA2CFDD2D500D88168;
+					56B77E0D2DC842D500CF4570 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 56B77DF42DC842D300CF4570;
 					};
 				};
 			};
-			buildConfigurationList = 5699B2B62CFDD2D500D88168 /* Build configuration list for PBXProject "OpCa" */;
+			buildConfigurationList = 56B77DF02DC842D300CF4570 /* Build configuration list for PBXProject "OpCa" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 5699B2B22CFDD2D500D88168;
+			mainGroup = 56B77DEC2DC842D300CF4570;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 5699B2BC2CFDD2D600D88168 /* Products */;
+			productRefGroup = 56B77DF62DC842D300CF4570 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5699B2BA2CFDD2D500D88168 /* OpCa */,
-				5699B2D02CFDD2D800D88168 /* OpCaTests */,
-				5699B2DA2CFDD2D800D88168 /* OpCaUITests */,
+				56B77DF42DC842D300CF4570 /* OpCa */,
+				56B77E032DC842D500CF4570 /* OpCaTests */,
+				56B77E0D2DC842D500CF4570 /* OpCaUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5699B2B92CFDD2D500D88168 /* Resources */ = {
+		56B77DF32DC842D300CF4570 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5699B2CF2CFDD2D800D88168 /* Resources */ = {
+		56B77E022DC842D500CF4570 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5699B2D92CFDD2D800D88168 /* Resources */ = {
+		56B77E0C2DC842D500CF4570 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -245,21 +232,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5699B2B72CFDD2D500D88168 /* Sources */ = {
+		56B77DF12DC842D300CF4570 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5699B2CD2CFDD2D800D88168 /* Sources */ = {
+		56B77E002DC842D500CF4570 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5699B2D72CFDD2D800D88168 /* Sources */ = {
+		56B77E0A2DC842D500CF4570 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -269,76 +256,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5699B2D32CFDD2D800D88168 /* PBXTargetDependency */ = {
+		56B77E062DC842D500CF4570 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5699B2BA2CFDD2D500D88168 /* OpCa */;
-			targetProxy = 5699B2D22CFDD2D800D88168 /* PBXContainerItemProxy */;
+			target = 56B77DF42DC842D300CF4570 /* OpCa */;
+			targetProxy = 56B77E052DC842D500CF4570 /* PBXContainerItemProxy */;
 		};
-		5699B2DD2CFDD2D800D88168 /* PBXTargetDependency */ = {
+		56B77E102DC842D500CF4570 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5699B2BA2CFDD2D500D88168 /* OpCa */;
-			targetProxy = 5699B2DC2CFDD2D800D88168 /* PBXContainerItemProxy */;
+			target = 56B77DF42DC842D300CF4570 /* OpCa */;
+			targetProxy = 56B77E0F2DC842D500CF4570 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		5699B2E52CFDD2D800D88168 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3889U3P728;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OpCa/Info.plist;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ihoflaz.OpCa;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		5699B2E62CFDD2D800D88168 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3889U3P728;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OpCa/Info.plist;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ihoflaz.OpCa;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		5699B2E72CFDD2D800D88168 /* Debug */ = {
+		56B77E162DC842D500CF4570 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -390,7 +321,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -398,11 +329,11 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
-		5699B2E82CFDD2D800D88168 /* Release */ = {
+		56B77E172DC842D500CF4570 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -448,26 +379,79 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		5699B2EA2CFDD2D800D88168 /* Debug */ = {
+		56B77E192DC842D500CF4570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ihoflaz.OpCa;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		56B77E1A2DC842D500CF4570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ihoflaz.OpCa;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		56B77E1C2DC842D500CF4570 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3889U3P728;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ihoflaz.OpCaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -478,15 +462,14 @@
 			};
 			name = Debug;
 		};
-		5699B2EB2CFDD2D800D88168 /* Release */ = {
+		56B77E1D2DC842D500CF4570 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3889U3P728;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ihoflaz.OpCaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -497,12 +480,11 @@
 			};
 			name = Release;
 		};
-		5699B2ED2CFDD2D800D88168 /* Debug */ = {
+		56B77E1F2DC842D500CF4570 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3889U3P728;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ihoflaz.OpCaUITests;
@@ -514,12 +496,11 @@
 			};
 			name = Debug;
 		};
-		5699B2EE2CFDD2D800D88168 /* Release */ = {
+		56B77E202DC842D500CF4570 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3889U3P728;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ihoflaz.OpCaUITests;
@@ -534,43 +515,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5699B2B62CFDD2D500D88168 /* Build configuration list for PBXProject "OpCa" */ = {
+		56B77DF02DC842D300CF4570 /* Build configuration list for PBXProject "OpCa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5699B2E72CFDD2D800D88168 /* Debug */,
-				5699B2E82CFDD2D800D88168 /* Release */,
+				56B77E162DC842D500CF4570 /* Debug */,
+				56B77E172DC842D500CF4570 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5699B2E42CFDD2D800D88168 /* Build configuration list for PBXNativeTarget "OpCa" */ = {
+		56B77E182DC842D500CF4570 /* Build configuration list for PBXNativeTarget "OpCa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5699B2E52CFDD2D800D88168 /* Debug */,
-				5699B2E62CFDD2D800D88168 /* Release */,
+				56B77E192DC842D500CF4570 /* Debug */,
+				56B77E1A2DC842D500CF4570 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5699B2E92CFDD2D800D88168 /* Build configuration list for PBXNativeTarget "OpCaTests" */ = {
+		56B77E1B2DC842D500CF4570 /* Build configuration list for PBXNativeTarget "OpCaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5699B2EA2CFDD2D800D88168 /* Debug */,
-				5699B2EB2CFDD2D800D88168 /* Release */,
+				56B77E1C2DC842D500CF4570 /* Debug */,
+				56B77E1D2DC842D500CF4570 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5699B2EC2CFDD2D800D88168 /* Build configuration list for PBXNativeTarget "OpCaUITests" */ = {
+		56B77E1E2DC842D500CF4570 /* Build configuration list for PBXNativeTarget "OpCaUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5699B2ED2CFDD2D800D88168 /* Debug */,
-				5699B2EE2CFDD2D800D88168 /* Release */,
+				56B77E1F2DC842D500CF4570 /* Debug */,
+				56B77E202DC842D500CF4570 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 5699B2B32CFDD2D500D88168 /* Project object */;
+	rootObject = 56B77DED2DC842D300CF4570 /* Project object */;
 }
