@@ -2,9 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <!-- App Temel Bilgileri -->
     <key>CFBundleIdentifier</key>
-    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <string>ihoflaz.OpCa</string>
     <key>CFBundleName</key>
     <string>$(PRODUCT_NAME)</string>
     <key>CFBundleDisplayName</key>
@@ -12,9 +11,9 @@
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleVersion</key>
-    <string>$(CURRENT_PROJECT_VERSION)</string>
+    <string>1</string>
     <key>CFBundleShortVersionString</key>
-    <string>$(MARKETING_VERSION)</string>
+    <string>1.0</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundlePackageType</key>
@@ -27,15 +26,15 @@
         <string>tr</string>
     </array>
     
-    <!-- Gizlilik İzinleri -->
     <key>NSCameraUsageDescription</key>
-    <string>OpCa requires camera access to capture images for parasite analysis.</string>
+    <string>OpCa needs camera access to capture microscopic images for parasite and digit recognition analysis.</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>OpCa requires access to your photo library to save and load images for parasite analysis.</string>
+    <string>OpCa needs photo library access to save and analyze images.</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>OpCa may use the microphone when recording video samples of live parasitic activity.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>OpCa uses your location to tag analysis samples with geographic information.</string>
     
-    <!-- Uygulama Ayarları -->
     <key>UIApplicationSceneManifest</key>
     <dict>
         <key>UIApplicationSupportsMultipleScenes</key>
@@ -46,7 +45,6 @@
     <key>UIApplicationSupportsIndirectInputEvents</key>
     <true/>
     
-    <!-- Desteklenen Cihaz Yönelimleri -->
     <key>UISupportedInterfaceOrientations</key>
     <array>
         <string>UIInterfaceOrientationPortrait</string>
@@ -59,22 +57,19 @@
         <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
     
-    <!-- Başlangıç Ekranı -->
     <key>UILaunchScreen</key>
     <dict>
         <key>UIColorName</key>
         <string>launchScreenBackground</string>
         <key>UIImageName</key>
-        <string>launch-logo</string>
+        <string>LaunchImage</string>
         <key>UIImageRespectsSafeAreaInsets</key>
         <true/>
     </dict>
     
-    <!-- Diğer Ayarlar -->
     <key>ITSAppUsesNonExemptEncryption</key>
     <false/>
     
-    <!-- iOS 18 için İyileştirmeler -->
     <key>NSAppTransportSecurity</key>
     <dict>
         <key>NSAllowsArbitraryLoads</key>
@@ -83,5 +78,25 @@
     
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen</string>
+    
+    <key>NSCoreMLUsageDescription</key>
+    <string>OpCa uses machine learning to recognize and analyze microscopic images and handwritten digits.</string>
+    
+    <key>MLModelDownloadExpirationPolicy</key>
+    <dict>
+        <key>expirationDuration</key>
+        <integer>86400</integer>
+    </dict>
+    
+    <key>MLModelDownloadRetryPolicy</key>
+    <dict>
+        <key>maxRetryCount</key>
+        <integer>3</integer>
+        <key>retryInterval</key>
+        <integer>5</integer>
+    </dict>
+    
+    <key>com.apple.developer.coreml.allow-local-models</key>
+    <true/>
 </dict>
 </plist> 

@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 enum ServiceError: Error {
     case invalidURL
@@ -7,6 +8,9 @@ enum ServiceError: Error {
     case decodingError(Error)
     case serverError(Int)
     case unknownError
+    case invalidImage
+    case modelPredictionFailed(String)
+    case modelNotLoaded(String)
     
     var message: String {
         switch self {
@@ -22,6 +26,12 @@ enum ServiceError: Error {
             return "Server error with status code: \(statusCode)"
         case .unknownError:
             return "An unknown error occurred"
+        case .invalidImage:
+            return "Görüntü işlenemedi veya MNIST formatına dönüştürülemedi"
+        case .modelPredictionFailed(let reason):
+            return "CoreML tahmin hatası: \(reason)"
+        case .modelNotLoaded(let reason):
+            return "Model yüklenemedi: \(reason)"
         }
     }
 }
@@ -35,13 +45,72 @@ struct ParasiteInfo: Identifiable, Codable {
     let imageURLs: [URL]
 }
 
+struct DigitInfo: Identifiable, Codable {
+    let id: String
+    let value: Int
+    let description: String
+    let examples: [URL]
+}
+
+// API iletişimi için kullanılacak DTO (Data Transfer Object) modelleri
+struct ParasiteResultDTO: Codable, Identifiable {
+    var id: UUID
+    var typeString: String
+    var confidence: Double
+    var detectionDate: Date
+    
+    // ParasiteResult modelinden dönüşüm için initializer
+    init(from parasiteResult: ParasiteResult) {
+        self.id = parasiteResult.id
+        self.typeString = parasiteResult.typeString
+        self.confidence = parasiteResult.confidence
+        self.detectionDate = parasiteResult.detectionDate
+    }
+    
+    // ParasiteResult modeline dönüşüm
+    func toParasiteResult() -> ParasiteResult {
+        let result = ParasiteResult()
+        result.id = self.id
+        result.typeString = self.typeString
+        result.confidence = self.confidence
+        result.detectionDate = self.detectionDate
+        return result
+    }
+}
+
+struct DigitResultDTO: Codable, Identifiable {
+    var id: UUID
+    var typeValue: Int
+    var confidence: Double
+    var detectionDate: Date
+    
+    // DigitResult modelinden dönüşüm için initializer
+    init(from digitResult: DigitResult) {
+        self.id = digitResult.id
+        self.typeValue = digitResult.typeValue
+        self.confidence = digitResult.confidence
+        self.detectionDate = digitResult.detectionDate
+    }
+    
+    // DigitResult modeline dönüşüm
+    func toDigitResult() -> DigitResult {
+        let result = DigitResult()
+        result.id = self.id
+        result.typeValue = self.typeValue
+        result.confidence = self.confidence
+        result.detectionDate = self.detectionDate
+        return result
+    }
+}
+
 struct AnalysisRequest: Codable {
     let imageData: Data
     let metadata: [String: String]
+    let analysisType: String
 }
 
 struct AnalysisResponse: Codable {
-    let results: [ParasiteResult]
+    let results: [ParasiteResultDTO]
     let processingTimeMs: Int
     let timestamp: Date
 }
@@ -49,21 +118,60 @@ struct AnalysisResponse: Codable {
 @Observable
 class APIService {
     private let baseURL = "https://api.example.com"
+    private let mnistService = MNISTService.shared
+    
+    enum AnalysisMode {
+        case parasite
+        case mnist
+    }
+    
+    var analysisMode: AnalysisMode = .parasite
     
     func analyzeImage(_ imageData: Data) async throws -> [ParasiteResult] {
-        // This is a mock implementation. In a real app, this would send the image to a server
-        // For now, we'll simulate a network delay and return mock data
-        try await Task.sleep(for: .seconds(2))
+        // Parazit modu aktifse standart analiz yap
+        if analysisMode == .parasite {
+            // Mock implementasyon - gerçek bir uygulamada sunucuya görüntü gönderilir
+            try await Task.sleep(for: .seconds(2))
+            
+            let result1 = ParasiteResult()
+            result1.typeString = ParasiteType.neosporosis.rawValue
+            result1.confidence = 0.87
+            result1.detectionDate = Date()
+            
+            let result2 = ParasiteResult()
+            result2.typeString = ParasiteType.echinococcosis.rawValue
+            result2.confidence = 0.10
+            result2.detectionDate = Date()
+            
+            let result3 = ParasiteResult()
+            result3.typeString = ParasiteType.coenurosis.rawValue
+            result3.confidence = 0.03
+            result3.detectionDate = Date()
+            
+            return [result1, result2, result3]
+        } else {
+            // MNIST modu - boş parazit sonucu döndür
+            return []
+        }
+    }
+    
+    func analyzeImageWithMNIST(_ imageData: Data) async throws -> [DigitResult] {
+        guard let image = UIImage(data: imageData) else {
+            throw ServiceError.invalidResponse
+        }
         
-        return [
-            ParasiteResult(type: .neosporosis, confidence: 0.87, detectionDate: Date()),
-            ParasiteResult(type: .echinococcosis, confidence: 0.10, detectionDate: Date()),
-            ParasiteResult(type: .coenurosis, confidence: 0.03, detectionDate: Date())
-        ]
+        return try await mnistService.recognizeDigit(from: image)
+    }
+    
+    func analyzeImageBoth(_ imageData: Data) async throws -> (parasiteResults: [ParasiteResult], digitResults: [DigitResult]) {
+        async let parasiteResults = analyzeImage(imageData)
+        async let digitResults = analyzeImageWithMNIST(imageData)
+        
+        return try await (parasiteResults: parasiteResults, digitResults: digitResults)
     }
     
     func getParasiteInfo(for type: ParasiteType) async throws -> ParasiteInfo {
-        // Mock implementation
+        // Mock implementasyon
         try await Task.sleep(for: .seconds(1))
         
         return ParasiteInfo(
@@ -80,8 +188,20 @@ class APIService {
         )
     }
     
+    func getDigitInfo(for digit: DigitType) async throws -> DigitInfo {
+        // Mock implementasyon
+        try await Task.sleep(for: .seconds(0.5))
+        
+        return DigitInfo(
+            id: String(digit.rawValue),
+            value: digit.rawValue,
+            description: "Rakam \(digit.rawValue) hakkında genel bilgi ve kullanım örnekleri.",
+            examples: []
+        )
+    }
+    
     func uploadAnalysis(_ analysis: Analysis) async throws -> Bool {
-        // Mock implementation
+        // Mock implementasyon
         try await Task.sleep(for: .seconds(1))
         return true
     }

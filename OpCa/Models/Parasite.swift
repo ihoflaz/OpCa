@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import SwiftData
 
 enum ParasiteType: String, CaseIterable, Codable, Identifiable {
     case neosporosis = "Neosporosis"
@@ -36,11 +37,34 @@ enum ParasiteType: String, CaseIterable, Codable, Identifiable {
     }
 }
 
-struct ParasiteResult: Identifiable, Codable {
+@Model
+final class ParasiteResult: Identifiable {
     var id: UUID = UUID()
-    var type: ParasiteType
+    var typeString: String
     var confidence: Double
     var detectionDate: Date
+    
+    init() {
+        self.typeString = ParasiteType.neosporosis.rawValue
+        self.confidence = 0
+        self.detectionDate = Date()
+    }
+    
+    init(id: UUID = UUID(), type: ParasiteType, confidence: Double, detectionDate: Date) {
+        self.id = id
+        self.typeString = type.rawValue
+        self.confidence = confidence
+        self.detectionDate = detectionDate
+    }
+    
+    var type: ParasiteType {
+        get {
+            return ParasiteType(rawValue: typeString) ?? .neosporosis
+        }
+        set {
+            typeString = newValue.rawValue
+        }
+    }
     
     var formattedConfidence: String {
         return "\(Int(confidence * 100))%"

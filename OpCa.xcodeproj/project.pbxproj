@@ -29,9 +29,22 @@
 		56B77E0E2DC842D500CF4570 /* OpCaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpCaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		56EA70E92DD4136D00EA19BA /* Exceptions for "OpCa" folder in "OpCa" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 56B77DF42DC842D300CF4570 /* OpCa */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		56B77DF72DC842D300CF4570 /* OpCa */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				56EA70E92DD4136D00EA19BA /* Exceptions for "OpCa" folder in "OpCa" target */,
+			);
 			path = OpCa;
 			sourceTree = "<group>";
 		};
@@ -322,7 +335,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/OpCa/InfoConfig.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/OpCa/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -381,7 +394,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/OpCa/InfoConfig.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/OpCa/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;

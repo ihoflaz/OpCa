@@ -94,11 +94,19 @@ struct OpCaApp: App {
     @Bindable private var userManager = UserManager.shared
     
     var sharedModelContainer: ModelContainer = {
+        // Model şeması
         let schema = Schema([
             Analysis.self,
             User.self,
+            ParasiteResult.self,
+            DigitResult.self
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        
+        // SwiftData model konfigürasyonu
+        let modelConfiguration = ModelConfiguration(
+            schema: schema,
+            isStoredInMemoryOnly: false
+        )
 
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])

@@ -95,7 +95,7 @@ class DashboardViewModel {
             
             // Count occurrences of each parasite type as the dominant one
             for analysis in analyses {
-                if let dominant = analysis.dominantParasite {
+                if analysis.analysisType == .parasite, let dominant = analysis.dominantParasite {
                     parasiteCounts[dominant, default: 0] += 1
                 }
             }

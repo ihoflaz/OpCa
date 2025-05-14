@@ -218,6 +218,7 @@ struct DashboardView: View {
                     location: "Test Location",
                     timestamp: Date(),
                     notes: "Test analysis",
+                    analysisType: .parasite,
                     results: mockParasiteResults
                 )
                 
@@ -347,71 +348,88 @@ struct AnalysisCardView: View {
     let analysis: Analysis
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            // Thumbnail image
-            ZStack(alignment: .topTrailing) {
-                if let imageData = analysis.imageData,
-                   let uiImage = UIImage(data: imageData) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(height: 120)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                } else {
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.3))
-                        .frame(height: 120)
-                        .overlay {
-                            Image(systemName: "photo")
-                                .foregroundStyle(.secondary)
-                                .font(.largeTitle)
-                        }
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                }
-                
-                // Upload status indicator
-                Image(systemName: analysis.isUploaded ? "checkmark.circle.fill" : "arrow.up.circle")
-                    .foregroundStyle(analysis.isUploaded ? .green : .orange)
-                    .padding(8)
-                    .background(.ultraThinMaterial)
-                    .clipShape(Circle())
-                    .padding(6)
-            }
-            
-            // Date
-            Text(analysis.formattedDate)
-                .font(.headline)
-                .foregroundStyle(.primary)
-            
-            // Dominant parasite
-            if let dominantType = analysis.dominantParasite {
-                HStack {
-                    Image(systemName: dominantType.icon)
-                        .foregroundStyle(dominantType.color)
-                    
-                    Text(dominantType.rawValue)
-                        .font(.subheadline)
-                }
-            } else {
-                Text(LocalizationManager.shared.localizedString(for: "no_parasites_detected"))
-                    .font(.subheadline)
+        if analysis.analysisType == nil {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Geçersiz Analiz")
+                    .font(.headline)
                     .foregroundStyle(.secondary)
-            }
-            
-            // Location if available
-            if let location = analysis.location, !location.isEmpty {
-                Text(location)
+                
+                Text("Bu analiz düzgün yüklenemedi.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
-                    .lineLimit(1)
             }
-            
-            Spacer()
+            .frame(width: 180, height: 200)
+            .padding(10)
+            .background(Color(.secondarySystemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .shadow(radius: 2, x: 0, y: 1)
+        } else {
+            VStack(alignment: .leading, spacing: 8) {
+                // Thumbnail image
+                ZStack(alignment: .topTrailing) {
+                    if let imageData = analysis.imageData,
+                       let uiImage = UIImage(data: imageData) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: 120)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                    } else {
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.3))
+                            .frame(height: 120)
+                            .overlay {
+                                Image(systemName: "photo")
+                                    .foregroundStyle(.secondary)
+                                    .font(.largeTitle)
+                            }
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                    }
+                    
+                    // Upload status indicator
+                    Image(systemName: analysis.isUploaded ? "checkmark.circle.fill" : "arrow.up.circle")
+                        .foregroundStyle(analysis.isUploaded ? .green : .orange)
+                        .padding(8)
+                        .background(.ultraThinMaterial)
+                        .clipShape(Circle())
+                        .padding(6)
+                }
+                
+                // Date
+                Text(analysis.formattedDate)
+                    .font(.headline)
+                    .foregroundStyle(.primary)
+                
+                // Dominant parasite
+                if let dominantType = analysis.dominantParasite {
+                    HStack {
+                        Image(systemName: dominantType.icon)
+                            .foregroundStyle(dominantType.color)
+                        
+                        Text(dominantType.rawValue)
+                            .font(.subheadline)
+                    }
+                } else {
+                    Text(LocalizationManager.shared.localizedString(for: "no_parasites_detected"))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                
+                // Location if available
+                if let location = analysis.location, !location.isEmpty {
+                    Text(location)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+                
+                Spacer()
+            }
+            .padding(10)
+            .background(Color(.secondarySystemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .shadow(radius: 2, x: 0, y: 1)
         }
-        .padding(10)
-        .background(Color(.secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .shadow(radius: 2, x: 0, y: 1)
     }
 }
 
